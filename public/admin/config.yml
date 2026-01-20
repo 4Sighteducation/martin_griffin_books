@@ -27,7 +27,6 @@ collections:
         fields:
           - {label: "Contact Heading", name: "heading", widget: "string", default: "Get in Touch"}
           - {label: "Contact Description", name: "description", widget: "text"}
-          - {label: "Formspree Form ID", name: "formspreeId", widget: "string", hint: "Your Formspree form ID (e.g., xyzabc123)"}
 
   - name: "books"
     label: "Books"
