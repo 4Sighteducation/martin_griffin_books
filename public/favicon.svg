@@ -1,4 +1,21 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
-  <rect width="100" height="100" fill="#079baa"/>
-  <text x="50" y="70" font-size="60" font-family="serif" font-weight="bold" text-anchor="middle" fill="white">MG</text>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 100 100">
+  <defs>
+    <clipPath id="circle">
+      <circle cx="50" cy="50" r="48"/>
+    </clipPath>
+  </defs>
+  <!-- Background circle -->
+  <circle cx="50" cy="50" r="50" fill="#23356f"/>
+  <!-- Book cover as background -->
+  <image xlink:href="/images/last-visitor-uk.jpg" x="10" y="10" width="80" height="80" clip-path="url(#circle)" opacity="0.8"/>
+  <!-- Overlay gradient for better visibility -->
+  <circle cx="50" cy="50" r="48" fill="url(#grad)" opacity="0.3"/>
+  <defs>
+    <radialGradient id="grad">
+      <stop offset="0%" style="stop-color:#23356f;stop-opacity:0" />
+      <stop offset="100%" style="stop-color:#23356f;stop-opacity:1" />
+    </radialGradient>
+  </defs>
+  <!-- Book icon overlay -->
+  <path d="M30,35 L70,35 L70,75 L30,75 Z M35,35 L35,75" stroke="white" stroke-width="2" fill="none" opacity="0.9"/>
 </svg>

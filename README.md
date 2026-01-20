@@ -11,11 +11,13 @@ Official website for author Martin Griffin, featuring his psychological thriller
 ## 📚 Features
 
 - Beautiful, responsive design
+- **Content Management System (CMS)** - Edit content without coding at `/admin`
 - SEO optimized with meta tags and structured data
 - Image slideshow for book covers
 - Contact form integration
 - Fast loading times and excellent Core Web Vitals
 - Sitemap generation
+- Favicon using "The Last Visitor" book cover
 
 ## 🛠️ Development
 
@@ -44,15 +46,18 @@ This site is configured for deployment on Vercel. Simply connect your GitHub rep
 
 ## 📝 Updating Content
 
-### To update book information:
-Edit `src/pages/index.astro`
+### For Martin (Non-Technical):
+Access the admin panel at `/admin` to edit all content through a user-friendly interface.
+See **CMS_INSTRUCTIONS.md** for detailed instructions.
 
-### To add more book cover images:
-1. Add images to `public/images/`
-2. Update the slideshow arrays in `index.astro`
+### For Developers:
+- Edit content files in `src/content/`
+- Books: `src/content/books/*.json`
+- Homepage: `src/content/homepage.json`
+- Contact: `src/content/contact.json`
+- SEO: `src/content/seo.json`
 
-### To update contact form:
-Replace `YOUR_FORM_ID` in the contact form with your Formspree form ID, or use an alternative form service.
+See **VERCEL_SETUP.md** for deployment and CMS configuration instructions.
 
 ## 📄 License
 

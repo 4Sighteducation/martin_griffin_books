@@ -1,0 +1,70 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "public/images"
+public_folder: "/images"
+
+collections:
+  - name: "pages"
+    label: "Pages"
+    files:
+      - label: "Homepage Content"
+        name: "homepage"
+        file: "src/content/homepage.json"
+        fields:
+          - {label: "Hero Title", name: "heroTitle", widget: "string", default: "Martin Griffin"}
+          - {label: "Hero Subtitle", name: "heroSubtitle", widget: "string", default: "Author of Psychological Thrillers"}
+          - {label: "Hero Description", name: "heroDescription", widget: "text"}
+          - {label: "About Heading", name: "aboutHeading", widget: "string", default: "About Martin Griffin"}
+          - {label: "About Paragraph 1", name: "aboutPara1", widget: "text"}
+          - {label: "About Paragraph 2", name: "aboutPara2", widget: "text"}
+          - {label: "About Paragraph 3", name: "aboutPara3", widget: "text"}
+      
+      - label: "Contact Information"
+        name: "contact"
+        file: "src/content/contact.json"
+        fields:
+          - {label: "Contact Heading", name: "heading", widget: "string", default: "Get in Touch"}
+          - {label: "Contact Description", name: "description", widget: "text"}
+          - {label: "Formspree Form ID", name: "formspreeId", widget: "string", hint: "Your Formspree form ID (e.g., xyzabc123)"}
+
+  - name: "books"
+    label: "Books"
+    folder: "src/content/books"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - {label: "Title", name: "title", widget: "string"}
+      - {label: "Order", name: "order", widget: "number", hint: "Display order (1 = first)"}
+      - {label: "Cover Image", name: "coverImage", widget: "image"}
+      - {label: "Tagline", name: "tagline", widget: "string"}
+      - {label: "Description Paragraph 1", name: "description1", widget: "text"}
+      - {label: "Description Paragraph 2", name: "description2", widget: "text", required: false}
+      - {label: "Description Paragraph 3", name: "description3", widget: "text", required: false}
+      - {label: "Amazon UK Link", name: "amazonUK", widget: "string", required: false}
+      - {label: "Amazon US Link", name: "amazonUS", widget: "string", required: false}
+      - {label: "Goodreads Link", name: "goodreads", widget: "string", required: false}
+      - {label: "Has Slideshow", name: "hasSlideshow", widget: "boolean", default: false}
+      - label: "Slideshow Images"
+        name: "slideshowImages"
+        widget: "list"
+        required: false
+        fields:
+          - {label: "Image", name: "image", widget: "image"}
+          - {label: "Caption", name: "caption", widget: "string"}
+          - {label: "Alt Text", name: "alt", widget: "string"}
+
+  - name: "settings"
+    label: "Site Settings"
+    files:
+      - label: "SEO & Metadata"
+        name: "seo"
+        file: "src/content/seo.json"
+        fields:
+          - {label: "Site Title", name: "siteTitle", widget: "string", default: "Martin Griffin Books"}
+          - {label: "Site Description", name: "siteDescription", widget: "text"}
+          - {label: "Author Name", name: "authorName", widget: "string", default: "Martin Griffin"}
+          - {label: "Twitter Handle", name: "twitter", widget: "string", required: false, hint: "@username"}
+          - {label: "Facebook Page", name: "facebook", widget: "string", required: false}
+          - {label: "Instagram", name: "instagram", widget: "string", required: false}

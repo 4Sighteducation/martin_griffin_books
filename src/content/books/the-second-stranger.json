@@ -1,0 +1,25 @@
+{
+  "title": "The Second Stranger",
+  "order": 1,
+  "coverImage": "/images/second-stranger-uk.jpg",
+  "tagline": "A masterful psychological thriller that will keep you guessing until the very last page.",
+  "description1": "When Remie Yorke's daughter goes missing, she's forced to confront a terrifying truth: someone has been watching her family. As the investigation unfolds, Remie discovers that the person she thought she knew best might be the greatest stranger of all.",
+  "description2": "A gripping exploration of trust, deception, and the secrets that lie within every family.",
+  "description3": "",
+  "amazonUK": "https://www.amazon.co.uk/Second-Stranger-Martin-Griffin/dp/1408714299",
+  "amazonUS": "https://www.amazon.com/Second-Stranger-Martin-Griffin/dp/1408714299",
+  "goodreads": "https://www.goodreads.com/book/show/52905890-the-second-stranger",
+  "hasSlideshow": true,
+  "slideshowImages": [
+    {
+      "image": "/images/second-stranger-uk.jpg",
+      "caption": "UK Edition",
+      "alt": "The Second Stranger - UK Edition"
+    },
+    {
+      "image": "/images/second-stranger.png",
+      "caption": "International Edition",
+      "alt": "The Second Stranger - International Edition"
+    }
+  ]
+}
