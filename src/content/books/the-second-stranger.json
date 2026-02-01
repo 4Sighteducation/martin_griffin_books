@@ -2,13 +2,12 @@
   "title": "The Second Stranger",
   "order": 1,
   "coverImage": "/images/second-stranger-uk.jpg",
-  "tagline": "A masterful psychological thriller that will keep you guessing until the very last page.",
+  "tagline": "Fresh, gripping and addictive! An absolute gem",
   "description1": "When Remie Yorke's daughter goes missing, she's forced to confront a terrifying truth: someone has been watching her family. As the investigation unfolds, Remie discovers that the person she thought she knew best might be the greatest stranger of all.",
   "description2": "A gripping exploration of trust, deception, and the secrets that lie within every family.",
-  "description3": "",
+  "description3": "ONE DETECTIVE. ONE MURDERER. BUT WHICH IS WHICH?",
   "amazonUK": "https://www.amazon.co.uk/Second-Stranger-Martin-Griffin/dp/1408714299",
   "amazonUS": "https://www.amazon.com/Second-Stranger-Martin-Griffin/dp/1408714299",
-  "goodreads": "https://www.goodreads.com/book/show/52905890-the-second-stranger",
   "hasSlideshow": true,
   "slideshowImages": [
     {
@@ -17,9 +16,38 @@
       "alt": "The Second Stranger - UK Edition"
     },
     {
-      "image": "/images/second-stranger.png",
+      "image": "/images/second-stranger-us.jpg",
+      "caption": "US Edition",
+      "alt": "The Second Stranger - US Edition"
+    },
+    {
+      "image": "/images/second-stranger-alt.png",
       "caption": "International Edition",
       "alt": "The Second Stranger - International Edition"
+    }
+  ],
+  "reviews": [
+    {
+      "quote": "Clever and bold. The Second Stranger starts with a shiver of dangerous uncertainty before exploding into full on murder and mayhem. Anything you think you know, you don't.",
+      "author": "Lisa Gardner",
+      "source": "#1 New York Times bestselling author"
+    },
+    {
+      "quote": "If there is a finer crime debut this year, it will be a surprise, for this story set in a remote hotel in the remote Scottish Highlands during a blizzard is stunning. There are shades of the great 1948 American film Key Largo as the serpentine story unfolds, and this is not only every bit as gripping, it also boasts a heroine whose resilience warms the blood.",
+      "author": "The Daily Mail"
+    },
+    {
+      "quote": "An impressive debut thriller shot through with a menace that makes its Highlands hotel setting feel like a house of cards. The tension winds ever tighter as the storm strengthens its grip and the cracks start to show—in the illusion of warmth and safety, the mask of the murderer, and the frozen landscape itself.",
+      "author": "Emma Styles",
+      "source": "author of No Country for Girls"
+    },
+    {
+      "quote": "Good premises can come easy; sustaining them across a novel's length is the trick. Martin Griffin does precisely this, and then some, in The Second Stranger, a Misery-evoking debut thriller set in the blizzard-blasted Scottish Highlands.",
+      "author": "Shelf Awareness"
+    },
+    {
+      "quote": "From the evocative setting to the clever plot, this locked room mystery is a brilliant debut from an excellent new voice in the world of crime fiction.",
+      "author": "My Weekly"
     }
   ]
 }

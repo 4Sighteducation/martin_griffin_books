@@ -2,13 +2,50 @@
   "title": "The Last Visitor",
   "order": 2,
   "coverImage": "/images/last-visitor-uk.jpg",
-  "tagline": "An atmospheric and chilling tale of isolation and paranoia.",
+  "tagline": "The island was abandoned for fifty years. So how did the body get there?",
   "description1": "Cora has retreated to a remote island lighthouse to escape her troubled past. But when a stranger arrives on the last ferry before winter, bringing with him dark secrets and dangerous intentions, Cora realizes that some pasts refuse to stay buried.",
   "description2": "A haunting psychological thriller about isolation, fear, and the price of running from the truth.",
   "description3": "",
   "amazonUK": "https://www.amazon.co.uk/Last-Visitor-Martin-Griffin/dp/1408714280",
   "amazonUS": "https://www.amazon.com/Last-Visitor-Martin-Griffin/dp/1408714280",
-  "goodreads": "https://www.goodreads.com/book/show/52905891-the-last-visitor",
-  "hasSlideshow": false,
-  "slideshowImages": []
+  "hasSlideshow": true,
+  "slideshowImages": [
+    {
+      "image": "/images/last-visitor-uk.jpg",
+      "caption": "UK Edition",
+      "alt": "The Last Visitor - UK Edition"
+    },
+    {
+      "image": "/images/last-visitor-us.png",
+      "caption": "US Edition",
+      "alt": "The Last Visitor - US Edition"
+    },
+    {
+      "image": "/images/last-visitor-de.png",
+      "caption": "German Edition",
+      "alt": "The Last Visitor - German Edition"
+    }
+  ],
+  "reviews": [
+    {
+      "quote": "Tense and absorbing . . . The Last Visitor is reminiscent of Agatha Christie's And Then There Were None, but Mr. Griffin's stylishly written white-knuckler, which culminates in a breathtaking abandoned-lighthouse sequence, creates an atmosphere all its own.",
+      "author": "Wall Street Journal"
+    },
+    {
+      "quote": "A worthy successor to [Griffin's] great debut, The Second Stranger, last year. Inventive, thrilling and with a fine sense of place, it glistens with menace.",
+      "author": "Daily Mail"
+    },
+    {
+      "quote": "A real tour de force. The Last Visitor is a perfect locked room mystery, with believable characters, razor-sharp dialogue and a desolate island setting that proves to be the stuff of nightmares. Martin Griffin has created a tale that grips you from start to finish.",
+      "author": "Kate Rhodes"
+    },
+    {
+      "quote": "Last Visitor will leave you breathless till the last page for a haunting premise, well-elaborated character development, and unpredictable storyline. Rich in narrativity, chilling suspense coupled with psychological intensity, this is one novel worth reading by anybody who loves mysterious mysteries.",
+      "author": "Dara Khyathi"
+    },
+    {
+      "quote": "A 'locked-room' mystery set on an island in the Atlantic, Last Visitor is a really good page-turning read.",
+      "author": "tripfiction.com"
+    }
+  ]
 }

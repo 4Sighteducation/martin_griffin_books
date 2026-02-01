@@ -2,19 +2,15 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import BookSlideshow from '../components/BookSlideshow.astro';
 import ContactForm from '../components/ContactForm.astro';
+import ReviewsCarousel from '../components/ReviewsCarousel.astro';
+import ReviewsModal from '../components/ReviewsModal.astro';
 
-const secondStrangerSlides = [
-  {
-    image: '/images/second-stranger-uk.jpg',
-    alt: 'The Second Stranger - UK Edition',
-    caption: 'UK Edition'
-  },
-  {
-    image: '/images/second-stranger.png',
-    alt: 'The Second Stranger - International Edition',
-    caption: 'International Edition'
-  }
-];
+// Load book data from JSON files
+import secondStrangerData from '../content/books/the-second-stranger.json';
+import lastVisitorData from '../content/books/the-last-visitor.json';
+
+// Load homepage content
+import homepageContent from '../content/homepage.json';
 ---
 
 <BaseLayout 
@@ -36,13 +32,13 @@ const secondStrangerSlides = [
     <!-- Content -->
     <div class="relative z-10 container mx-auto px-6 py-20 text-center text-white">
       <h1 class="text-5xl md:text-7xl lg:text-8xl font-bold mb-6 animate-fade-in">
-        Martin Griffin
+        {homepageContent.heroTitle}
       </h1>
       <p class="text-2xl md:text-3xl lg:text-4xl font-light mb-8 text-accent-light">
-        Author of Psychological Thrillers
+        {homepageContent.heroSubtitle}
       </p>
       <p class="text-lg md:text-xl max-w-2xl mx-auto mb-12 leading-relaxed">
-        Dive into worlds where nothing is as it seems, and every page turns with unexpected revelations.
+        {homepageContent.heroDescription}
       </p>
       <a 
         href="#books" 
@@ -66,18 +62,12 @@ const secondStrangerSlides = [
       <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center">
         <div class="order-2 md:order-1">
           <h2 class="text-4xl md:text-5xl font-bold mb-6 text-primary-700">
-            About Martin Griffin
+            {homepageContent.aboutHeading}
           </h2>
           <div class="prose prose-lg text-gray-700 leading-relaxed space-y-4">
-            <p>
-              Martin Griffin is an acclaimed author of psychological thrillers that explore the depths of human nature and the darkness that lurks beneath ordinary lives.
-            </p>
-            <p>
-              With a talent for creating atmospheric tension and unforgettable characters, Martin's novels have captivated readers around the world. His work has been translated into multiple languages and continues to earn critical acclaim.
-            </p>
-            <p>
-              When not writing, Martin enjoys exploring the landscapes that inspire his stories, from remote coastal towns to the wild moorlands of Britain.
-            </p>
+            <p>{homepageContent.aboutPara1}</p>
+            <p>{homepageContent.aboutPara2}</p>
+            <p>{homepageContent.aboutPara3}</p>
           </div>
         </div>
         <div class="order-1 md:order-2">
@@ -103,97 +93,143 @@ const secondStrangerSlides = [
         <div class="grid md:grid-cols-2 gap-12 items-start">
           <div class="space-y-6">
             <h3 class="text-3xl md:text-4xl font-bold text-primary-800">
-              The Second Stranger
+              {secondStrangerData.title}
             </h3>
             <div class="prose prose-lg text-gray-700 leading-relaxed space-y-4">
-              <p>
-                <em>"A masterful psychological thriller that will keep you guessing until the very last page."</em>
+              <p class="text-xl italic text-primary-600">
+                "{secondStrangerData.tagline}"
               </p>
-              <p>
-                When Remie Yorke's daughter goes missing, she's forced to confront a terrifying truth: someone has been watching her family. As the investigation unfolds, Remie discovers that the person she thought she knew best might be the greatest stranger of all.
-              </p>
-              <p>
-                A gripping exploration of trust, deception, and the secrets that lie within every family.
-              </p>
+              <p>{secondStrangerData.description1}</p>
+              {secondStrangerData.description2 && <p>{secondStrangerData.description2}</p>}
+              {secondStrangerData.description3 && (
+                <p class="font-semibold text-primary-700">{secondStrangerData.description3}</p>
+              )}
             </div>
+            
+            <!-- Buy Buttons -->
             <div class="flex flex-wrap gap-4">
-              <a 
-                href="https://www.amazon.com/Second-Stranger-Martin-Griffin/dp/1408714299" 
-                target="_blank"
-                rel="noopener noreferrer"
-                class="inline-flex items-center gap-2 bg-primary-600 hover:bg-primary-700 text-white font-semibold px-6 py-3 rounded-lg transition-all transform hover:scale-105 shadow-lg"
-              >
-                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M13 12h7v1.5h-7m0-4h7V11h-7m0 3.5h7V16h-7m8-12H3a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2m0 15h-9v-1h9v1m0-2h-9v-1h9v1m0-2h-9v-1h9v1m0-2h-9V9h9v3m0-4H3V6h16v2z"/>
-                </svg>
-                Buy on Amazon
-              </a>
-              <a 
-                href="https://www.goodreads.com/book/show/52905890-the-second-stranger" 
-                target="_blank"
-                rel="noopener noreferrer"
-                class="inline-flex items-center gap-2 border-2 border-primary-600 text-primary-600 hover:bg-primary-600 hover:text-white font-semibold px-6 py-3 rounded-lg transition-all"
-              >
-                View on Goodreads
-              </a>
+              {secondStrangerData.amazonUK && (
+                <a 
+                  href={secondStrangerData.amazonUK} 
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="inline-flex items-center gap-2 bg-primary-600 hover:bg-primary-700 text-white font-semibold px-6 py-3 rounded-lg transition-all transform hover:scale-105 shadow-lg"
+                >
+                  <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M13 12h7v1.5h-7m0-4h7V11h-7m0 3.5h7V16h-7m8-12H3a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2m0 15h-9v-1h9v1m0-2h-9v-1h9v1m0-2h-9v-1h9v1m0-2h-9V9h9v3m0-4H3V6h16v2z"/>
+                  </svg>
+                  Buy on Amazon UK
+                </a>
+              )}
+              {secondStrangerData.amazonUS && (
+                <a 
+                  href={secondStrangerData.amazonUS} 
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="inline-flex items-center gap-2 border-2 border-primary-600 text-primary-600 hover:bg-primary-600 hover:text-white font-semibold px-6 py-3 rounded-lg transition-all"
+                >
+                  Buy on Amazon US
+                </a>
+              )}
             </div>
+
+            <!-- Reviews - OPTION 1: Modal (Click to Open) -->
+            {secondStrangerData.reviews && secondStrangerData.reviews.length > 0 && (
+              <ReviewsModal reviews={secondStrangerData.reviews} bookTitle={secondStrangerData.title} />
+            )}
           </div>
+          
+          <!-- Book Covers Slideshow -->
           <div>
-            <BookSlideshow slides={secondStrangerSlides} autoplay={true} interval={5000} />
+            {secondStrangerData.hasSlideshow && secondStrangerData.slideshowImages.length > 0 ? (
+              <BookSlideshow slides={secondStrangerData.slideshowImages} autoplay={true} interval={5000} />
+            ) : (
+              <img 
+                src={secondStrangerData.coverImage} 
+                alt={secondStrangerData.title} 
+                class="rounded-lg shadow-2xl w-full transform hover:scale-105 transition-transform duration-300"
+              />
+            )}
           </div>
         </div>
+
+        <!-- Reviews - OPTION 2: Carousel (Always Visible) -->
+        <!-- Uncomment this and comment out the Modal above to use this style instead -->
+        <!-- {secondStrangerData.reviews && secondStrangerData.reviews.length > 0 && (
+          <ReviewsCarousel reviews={secondStrangerData.reviews} bookTitle={secondStrangerData.title} />
+        )} -->
       </div>
 
       <!-- The Last Visitor -->
       <div class="max-w-6xl mx-auto">
         <div class="grid md:grid-cols-2 gap-12 items-start">
+          <!-- Book Covers Slideshow -->
           <div class="order-2 md:order-1">
-            <div class="relative w-full max-w-2xl mx-auto">
+            {lastVisitorData.hasSlideshow && lastVisitorData.slideshowImages.length > 0 ? (
+              <BookSlideshow slides={lastVisitorData.slideshowImages} autoplay={true} interval={5000} />
+            ) : (
               <img 
-                src="/images/last-visitor-uk.jpg" 
-                alt="The Last Visitor - UK Edition" 
+                src={lastVisitorData.coverImage} 
+                alt={lastVisitorData.title} 
                 class="rounded-lg shadow-2xl w-full transform hover:scale-105 transition-transform duration-300"
               />
-            </div>
+            )}
           </div>
+          
           <div class="order-1 md:order-2 space-y-6">
             <h3 class="text-3xl md:text-4xl font-bold text-primary-800">
-              The Last Visitor
+              {lastVisitorData.title}
             </h3>
             <div class="prose prose-lg text-gray-700 leading-relaxed space-y-4">
-              <p>
-                <em>"An atmospheric and chilling tale of isolation and paranoia."</em>
+              <p class="text-xl italic text-primary-600">
+                "{lastVisitorData.tagline}"
               </p>
-              <p>
-                Cora has retreated to a remote island lighthouse to escape her troubled past. But when a stranger arrives on the last ferry before winter, bringing with him dark secrets and dangerous intentions, Cora realizes that some pasts refuse to stay buried.
-              </p>
-              <p>
-                A haunting psychological thriller about isolation, fear, and the price of running from the truth.
-              </p>
+              <p>{lastVisitorData.description1}</p>
+              {lastVisitorData.description2 && <p>{lastVisitorData.description2}</p>}
+              {lastVisitorData.description3 && (
+                <p class="font-semibold text-primary-700">{lastVisitorData.description3}</p>
+              )}
             </div>
+            
+            <!-- Buy Buttons -->
             <div class="flex flex-wrap gap-4">
-              <a 
-                href="https://www.amazon.com/Last-Visitor-Martin-Griffin/dp/1408714280" 
-                target="_blank"
-                rel="noopener noreferrer"
-                class="inline-flex items-center gap-2 bg-primary-600 hover:bg-primary-700 text-white font-semibold px-6 py-3 rounded-lg transition-all transform hover:scale-105 shadow-lg"
-              >
-                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M13 12h7v1.5h-7m0-4h7V11h-7m0 3.5h7V16h-7m8-12H3a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2m0 15h-9v-1h9v1m0-2h-9v-1h9v1m0-2h-9v-1h9v1m0-2h-9V9h9v3m0-4H3V6h16v2z"/>
-                </svg>
-                Buy on Amazon
-              </a>
-              <a 
-                href="https://www.goodreads.com/book/show/52905891-the-last-visitor" 
-                target="_blank"
-                rel="noopener noreferrer"
-                class="inline-flex items-center gap-2 border-2 border-primary-600 text-primary-600 hover:bg-primary-600 hover:text-white font-semibold px-6 py-3 rounded-lg transition-all"
-              >
-                View on Goodreads
-              </a>
+              {lastVisitorData.amazonUK && (
+                <a 
+                  href={lastVisitorData.amazonUK} 
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="inline-flex items-center gap-2 bg-primary-600 hover:bg-primary-700 text-white font-semibold px-6 py-3 rounded-lg transition-all transform hover:scale-105 shadow-lg"
+                >
+                  <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M13 12h7v1.5h-7m0-4h7V11h-7m0 3.5h7V16h-7m8-12H3a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2m0 15h-9v-1h9v1m0-2h-9v-1h9v1m0-2h-9v-1h9v1m0-2h-9V9h9v3m0-4H3V6h16v2z"/>
+                  </svg>
+                  Buy on Amazon UK
+                </a>
+              )}
+              {lastVisitorData.amazonUS && (
+                <a 
+                  href={lastVisitorData.amazonUS} 
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="inline-flex items-center gap-2 border-2 border-primary-600 text-primary-600 hover:bg-primary-600 hover:text-white font-semibold px-6 py-3 rounded-lg transition-all"
+                >
+                  Buy on Amazon US
+                </a>
+              )}
             </div>
+
+            <!-- Reviews - OPTION 1: Modal (Click to Open) -->
+            {lastVisitorData.reviews && lastVisitorData.reviews.length > 0 && (
+              <ReviewsModal reviews={lastVisitorData.reviews} bookTitle={lastVisitorData.title} />
+            )}
           </div>
         </div>
+
+        <!-- Reviews - OPTION 2: Carousel (Always Visible) -->
+        <!-- Uncomment this and comment out the Modal above to use this style instead -->
+        <!-- {lastVisitorData.reviews && lastVisitorData.reviews.length > 0 && (
+          <ReviewsCarousel reviews={lastVisitorData.reviews} bookTitle={lastVisitorData.title} />
+        )} -->
       </div>
     </div>
   </section>

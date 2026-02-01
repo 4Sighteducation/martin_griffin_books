@@ -1,0 +1,131 @@
+---
+// Reviews Carousel Component - Option 1: Elegant Sliding Cards
+
+export interface Review {
+  quote: string;
+  author: string;
+  source?: string;
+}
+
+export interface Props {
+  reviews: Review[];
+  bookTitle: string;
+}
+
+const { reviews, bookTitle } = Astro.props;
+const carouselId = `reviews-${Math.random().toString(36).substr(2, 9)}`;
+---
+
+<div class="reviews-section my-12">
+  <h3 class="text-2xl font-bold text-center mb-8 text-primary-700">What Readers & Critics Say</h3>
+  
+  <div class="relative max-w-4xl mx-auto" id={carouselId}>
+    <!-- Reviews Container -->
+    <div class="overflow-hidden rounded-xl">
+      <div class="reviews-track flex transition-transform duration-500 ease-in-out">
+        {reviews.map((review, index) => (
+          <div 
+            class="review-slide min-w-full px-4"
+            data-slide-index={index}
+          >
+            <div class="bg-gradient-to-br from-primary-50 to-white p-8 rounded-xl shadow-lg border border-primary-100">
+              <!-- Quote Icon -->
+              <svg class="w-12 h-12 text-primary-300 mb-4" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M6 17h3l2-4V7H5v6h3zm8 0h3l2-4V7h-6v6h3z"/>
+              </svg>
+              
+              <!-- Review Text -->
+              <blockquote class="text-lg text-gray-700 leading-relaxed mb-6 italic">
+                "{review.quote}"
+              </blockquote>
+              
+              <!-- Author -->
+              <div class="flex items-center gap-3">
+                <div class="h-1 w-12 bg-primary-500"></div>
+                <div>
+                  <p class="font-semibold text-primary-800">{review.author}</p>
+                  {review.source && (
+                    <p class="text-sm text-gray-600">{review.source}</p>
+                  )}
+                </div>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <!-- Navigation Arrows -->
+    {reviews.length > 1 && (
+      <>
+        <button 
+          class="review-prev absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 bg-white hover:bg-primary-600 hover:text-white text-primary-600 rounded-full p-3 shadow-lg transition-all z-10"
+          aria-label="Previous review"
+        >
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+          </svg>
+        </button>
+        <button 
+          class="review-next absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 bg-white hover:bg-primary-600 hover:text-white text-primary-600 rounded-full p-3 shadow-lg transition-all z-10"
+          aria-label="Next review"
+        >
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+          </svg>
+        </button>
+      </>
+    )}
+
+    <!-- Dots Indicator -->
+    {reviews.length > 1 && (
+      <div class="flex justify-center gap-2 mt-6">
+        {reviews.map((_, index) => (
+          <button
+            class={`review-dot w-2 h-2 rounded-full transition-all ${index === 0 ? 'bg-primary-600 w-8' : 'bg-gray-300 hover:bg-gray-400'}`}
+            data-dot-index={index}
+            aria-label={`Go to review ${index + 1}`}
+          />
+        ))}
+      </div>
+    )}
+  </div>
+</div>
+
+<script define:vars={{ carouselId, reviewsCount: reviews.length }}>
+  if (reviewsCount > 1) {
+    const container = document.getElementById(carouselId);
+    const track = container.querySelector('.reviews-track');
+    const slides = container.querySelectorAll('.review-slide');
+    const dots = container.querySelectorAll('.review-dot');
+    const prevBtn = container.querySelector('.review-prev');
+    const nextBtn = container.querySelector('.review-next');
+    let currentSlide = 0;
+
+    function goToSlide(n) {
+      currentSlide = (n + reviewsCount) % reviewsCount;
+      track.style.transform = `translateX(-${currentSlide * 100}%)`;
+      
+      // Update dots
+      dots.forEach((dot, index) => {
+        if (index === currentSlide) {
+          dot.classList.add('bg-primary-600', 'w-8');
+          dot.classList.remove('bg-gray-300');
+        } else {
+          dot.classList.remove('bg-primary-600', 'w-8');
+          dot.classList.add('bg-gray-300');
+        }
+      });
+    }
+
+    prevBtn?.addEventListener('click', () => goToSlide(currentSlide - 1));
+    nextBtn?.addEventListener('click', () => goToSlide(currentSlide + 1));
+    
+    dots.forEach((dot, index) => {
+      dot.addEventListener('click', () => goToSlide(index));
+    });
+
+    // Auto-play
+    setInterval(() => goToSlide(currentSlide + 1), 8000);
+  }
+</script>
