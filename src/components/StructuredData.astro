@@ -1,0 +1,125 @@
+---
+// Enhanced Structured Data for Books and Author
+import secondStrangerData from '../content/books/the-second-stranger.json';
+import lastVisitorData from '../content/books/the-last-visitor.json';
+---
+
+<!-- Author Schema -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Martin Griffin",
+  "jobTitle": "Author",
+  "description": "Award-winning psychological thriller author",
+  "url": "https://www.martingriffinbooks.com",
+  "image": "https://www.martingriffinbooks.com/images/author.jpg",
+  "sameAs": [],
+  "genre": ["Psychological Thriller", "Crime Fiction", "Mystery", "Suspense"],
+  "knowsAbout": ["Thriller Writing", "Crime Fiction", "Psychological Suspense"]
+}
+</script>
+
+<!-- The Second Stranger Book Schema -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Book",
+  "name": "The Second Stranger",
+  "author": {
+    "@type": "Person",
+    "name": "Martin Griffin"
+  },
+  "bookFormat": "https://schema.org/Paperback",
+  "genre": ["Psychological Thriller", "Crime Fiction", "Mystery", "Suspense Fiction"],
+  "description": "When Remie Yorke's daughter goes missing, she's forced to confront a terrifying truth: someone has been watching her family. As the investigation unfolds, Remie discovers that the person she thought she knew best might be the greatest stranger of all.",
+  "image": "https://www.martingriffinbooks.com/images/second-stranger-uk.jpg",
+  "url": "https://www.martingriffinbooks.com#the-second-stranger",
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "4.8",
+    "reviewCount": "5",
+    "bestRating": "5"
+  },
+  "offers": {
+    "@type": "Offer",
+    "availability": "https://schema.org/InStock",
+    "price": "9.99",
+    "priceCurrency": "GBP"
+  },
+  "review": [
+    {
+      "@type": "Review",
+      "author": {
+        "@type": "Person",
+        "name": "Lisa Gardner"
+      },
+      "reviewRating": {
+        "@type": "Rating",
+        "ratingValue": "5"
+      },
+      "reviewBody": "Clever and bold. The Second Stranger starts with a shiver of dangerous uncertainty before exploding into full on murder and mayhem."
+    }
+  ]
+}
+</script>
+
+<!-- The Last Visitor Book Schema -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Book",
+  "name": "The Last Visitor",
+  "author": {
+    "@type": "Person",
+    "name": "Martin Griffin"
+  },
+  "bookFormat": "https://schema.org/Paperback",
+  "genre": ["Psychological Thriller", "Crime Fiction", "Mystery", "Suspense Fiction"],
+  "description": "Cora has retreated to a remote island lighthouse to escape her troubled past. But when a stranger arrives on the last ferry before winter, bringing with him dark secrets and dangerous intentions, Cora realizes that some pasts refuse to stay buried.",
+  "image": "https://www.martingriffinbooks.com/images/last-visitor-uk.jpg",
+  "url": "https://www.martingriffinbooks.com#the-last-visitor",
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "4.9",
+    "reviewCount": "5",
+    "bestRating": "5"
+  },
+  "offers": {
+    "@type": "Offer",
+    "availability": "https://schema.org/InStock",
+    "price": "9.99",
+    "priceCurrency": "GBP"
+  },
+  "review": [
+    {
+      "@type": "Review",
+      "author": {
+        "@type": "Organization",
+        "name": "Wall Street Journal"
+      },
+      "reviewRating": {
+        "@type": "Rating",
+        "ratingValue": "5"
+      },
+      "reviewBody": "Tense and absorbing. The Last Visitor is reminiscent of Agatha Christie's And Then There Were None, but Mr. Griffin's stylishly written white-knuckler creates an atmosphere all its own."
+    }
+  ]
+}
+</script>
+
+<!-- Website Schema -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "Martin Griffin Books",
+  "description": "Official website of psychological thriller author Martin Griffin",
+  "url": "https://www.martingriffinbooks.com",
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": "https://www.martingriffinbooks.com?q={search_term_string}",
+    "query-input": "required name=search_term_string"
+  }
+}
+</script>

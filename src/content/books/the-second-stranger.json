@@ -12,18 +12,13 @@
   "slideshowImages": [
     {
       "image": "/images/second-stranger-uk.jpg",
-      "caption": "UK Edition",
+      "caption": "",
       "alt": "The Second Stranger - UK Edition"
     },
     {
       "image": "/images/second-stranger-us.jpg",
-      "caption": "US Edition",
+      "caption": "",
       "alt": "The Second Stranger - US Edition"
-    },
-    {
-      "image": "/images/second-stranger-alt.png",
-      "caption": "International Edition",
-      "alt": "The Second Stranger - International Edition"
     }
   ],
   "reviews": [

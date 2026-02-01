@@ -12,17 +12,17 @@
   "slideshowImages": [
     {
       "image": "/images/last-visitor-uk.jpg",
-      "caption": "UK Edition",
+      "caption": "",
       "alt": "The Last Visitor - UK Edition"
     },
     {
       "image": "/images/last-visitor-us.png",
-      "caption": "US Edition",
+      "caption": "",
       "alt": "The Last Visitor - US Edition"
     },
     {
       "image": "/images/last-visitor-de.png",
-      "caption": "German Edition",
+      "caption": "",
       "alt": "The Last Visitor - German Edition"
     }
   ],

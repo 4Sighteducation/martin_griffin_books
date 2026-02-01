@@ -4,17 +4,26 @@ export interface Props {
   description: string;
   image?: string;
   article?: boolean;
+  keywords?: string;
 }
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
-const { title, description, image = '/images/author.jpg', article = false } = Astro.props;
+const { title, description, image = '/images/author.jpg', article = false, keywords = '' } = Astro.props;
 const siteName = 'Martin Griffin Books';
 const fullTitle = title === siteName ? title : `${title} | ${siteName}`;
+
+// Default keywords if not provided
+const defaultKeywords = 'psychological thriller, crime fiction, suspense novels, mystery books, thriller author, new thriller books, best psychological thrillers, crime novels, suspense fiction, Martin Griffin';
+const metaKeywords = keywords || defaultKeywords;
 ---
 
 <!-- Primary Meta Tags -->
 <meta name="title" content={fullTitle} />
 <meta name="description" content={description} />
+<meta name="keywords" content={metaKeywords} />
+<meta name="author" content="Martin Griffin" />
+<meta name="language" content="English" />
+<meta name="robots" content="index, follow" />
 <link rel="canonical" href={canonicalURL} />
 
 <!-- Open Graph / Facebook -->
@@ -24,6 +33,7 @@ const fullTitle = title === siteName ? title : `${title} | ${siteName}`;
 <meta property="og:description" content={description} />
 <meta property="og:image" content={new URL(image, Astro.site)} />
 <meta property="og:site_name" content={siteName} />
+<meta property="og:locale" content="en_GB" />
 
 <!-- Twitter -->
 <meta property="twitter:card" content="summary_large_image" />
@@ -32,14 +42,6 @@ const fullTitle = title === siteName ? title : `${title} | ${siteName}`;
 <meta property="twitter:description" content={description} />
 <meta property="twitter:image" content={new URL(image, Astro.site)} />
 
-<!-- Structured Data -->
-<script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Person",
-    "name": "Martin Griffin",
-    "jobTitle": "Author",
-    "url": "https://www.martingriffinbooks.com",
-    "sameAs": []
-  }
-</script>
+<!-- Additional SEO Tags -->
+<meta name="google-site-verification" content="YOUR_VERIFICATION_CODE" />
+<meta name="msvalidate.01" content="YOUR_BING_VERIFICATION_CODE" />
