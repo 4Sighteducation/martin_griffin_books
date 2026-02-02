@@ -14,6 +14,16 @@
   <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
 
   <script>
+    // IMPORTANT: this CMS is hosted on Vercel, but Identity lives on Netlify.
+    // Without explicitly setting APIUrl, the Identity widget tries:
+    //   https://www.martingriffinbooks.com/.netlify/identity
+    // which fails and produces "Unable to access identity settings".
+    if (window.netlifyIdentity && window.netlifyIdentity.init) {
+      window.netlifyIdentity.init({
+        APIUrl: "https://martin-griffin-books.netlify.app/.netlify/identity",
+      });
+    }
+
     // After successful login, reload /admin so Decap CMS can continue.
     if (window.netlifyIdentity) {
       window.netlifyIdentity.on("init", (user) => {
