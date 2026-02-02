@@ -62,147 +62,74 @@
   </head>
   <body>
     <div class="card">
-      <h1>Finishing sign-in…</h1>
-      <p>
-        If the sign-in window doesn’t appear automatically, click the button below.
-      </p>
-      <div class="actions">
-        <button id="open-auth" type="button">Open sign-in</button>
-        <button id="go-admin" type="button" class="secondary">Go to /admin</button>
-      </div>
+      <h1>Finish setting up your editor login</h1>
+      <p>Set a password to activate your invite.</p>
+      <form id="invite-form" class="actions" style="margin-top: 12px; flex-direction: column;">
+        <label style="width: 100%;">
+          <span style="display:block;font-size:12px;color:#6b7280;margin-bottom:6px;">New password</span>
+          <input id="pw" type="password" minlength="8" required style="width:100%;padding:10px;border:1px solid #e5e7eb;border-radius:8px;" />
+        </label>
+        <label style="width: 100%;">
+          <span style="display:block;font-size:12px;color:#6b7280;margin-bottom:6px;">Confirm password</span>
+          <input id="pw2" type="password" minlength="8" required style="width:100%;padding:10px;border:1px solid #e5e7eb;border-radius:8px;" />
+        </label>
+        <button type="submit" style="width:100%;">Set password</button>
+        <button id="go-admin" type="button" class="secondary" style="width:100%;">Go to /admin</button>
+      </form>
       <div id="status" class="status"></div>
     </div>
 
-    <script defer src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
-    <script>
+    <script type="module">
+      import GoTrue from "https://cdn.jsdelivr.net/npm/gotrue-js/+esm";
+
       const NETLIFY_IDENTITY_API_URL =
         "https://martin-griffin-books.netlify.app/.netlify/identity";
 
-      function isTokenHash(hash) {
-        return (
-          hash.includes("invite_token=") ||
-          hash.includes("recovery_token=") ||
-          hash.includes("confirmation_token=")
-        );
-      }
+      const statusEl = document.getElementById("status");
+      const setStatus = (msg) => {
+        if (statusEl) statusEl.textContent = msg;
+      };
 
-      function getRedirectUrlFromQuery() {
-        try {
-          // URLSearchParams already returns a decoded string; do NOT decode again
-          // or we may corrupt the embedded URL and lose the hash token.
-          const params = new URLSearchParams(window.location.search || "");
-          const raw = params.get("redirect") || params.get("confirmation_url") || "";
-          return raw || "";
-        } catch {
-          return "";
-        }
-      }
+      const params = new URLSearchParams(window.location.search || "");
+      const tokenFromQuery = params.get("invite_token");
+      const tokenFromHash = (window.location.hash || "").match(/invite_token=([^&]+)/)?.[1];
+      const inviteToken = tokenFromQuery || tokenFromHash || "";
 
-      window.addEventListener("DOMContentLoaded", () => {
-        // If the invite link was opened via http://, upgrade to https while preserving the hash.
-        if (window.location.protocol === "http:") {
-          window.location.replace(
-            "https://" +
-              window.location.host +
-              window.location.pathname +
-              window.location.search +
-              window.location.hash,
-          );
-          return;
-        }
+      setStatus(inviteToken ? "Invite token detected." : "Missing invite token.");
 
-        const statusEl = document.getElementById("status");
-        const setStatus = (msg) => {
-          if (statusEl) statusEl.textContent = msg;
-        };
-
-        // Some email clients/trackers drop the URL hash (where Netlify stores tokens).
-        // If we were given a redirect URL in the query string, recover the hash from it.
-        const recoveredUrl = getRedirectUrlFromQuery();
-        // Some clients append a trailing "#" which becomes window.location.hash === "#".
-        // Treat that as "no hash" so we can recover the real token hash from the redirect URL.
-        const hasMeaningfulHash =
-          window.location.hash && window.location.hash !== "#" && window.location.hash.length > 1;
-
-        if (recoveredUrl && !hasMeaningfulHash) {
-          // Preserve the token hash from the embedded URL.
-          const upgraded = recoveredUrl.replace(/^http:\/\//i, "https://");
-          const hashFromUrl =
-            upgraded.indexOf("#") >= 0 ? upgraded.slice(upgraded.indexOf("#")) : "";
-          if (hashFromUrl) {
-            // Reload with the hash in the URL so the Identity widget can see it at load time.
-            window.location.replace(
-              window.location.pathname + window.location.search + hashFromUrl,
-            );
-            return;
-          }
-        }
-
-        const hash = window.location.hash || "";
-        setStatus(`Detected hash: ${hash || "(none)"} | redirect param: ${recoveredUrl ? "yes" : "no"}`);
-
-        // If we got here without a token, bounce to the CMS.
-        if (!isTokenHash(hash)) {
-          window.location.replace("https://www.martingriffinbooks.com/admin/");
-          return;
-        }
-
-        const openIdentity = () => {
-          // init is safe to call multiple times
-          window.netlifyIdentity.init({ APIUrl: NETLIFY_IDENTITY_API_URL });
-
-          // Opening the widget here lets it process the token hash.
-          // Use the signup view so invite/password flows don't land on the login form.
-          window.netlifyIdentity.open("signup");
-        };
-
-        const maybeReady = () =>
-          window.netlifyIdentity && typeof window.netlifyIdentity.open === "function";
-
-        const tryOpen = () => {
-          try {
-            if (!maybeReady()) return false;
-            openIdentity();
-            return true;
-          } catch (e) {
-            setStatus(`Error opening Identity: ${e && e.message ? e.message : String(e)}`);
-            return false;
-          }
-        };
-
-        // Wire manual buttons (user gesture can help in strict browser settings)
-        const openBtn = document.getElementById("open-auth");
-        if (openBtn) openBtn.addEventListener("click", () => tryOpen());
-        const adminBtn = document.getElementById("go-admin");
-        if (adminBtn)
-          adminBtn.addEventListener("click", () =>
-            window.location.replace("https://www.martingriffinbooks.com/admin/"),
-          );
-
-        if (tryOpen()) return;
-
-        let tries = 0;
-        const interval = setInterval(() => {
-          tries += 1;
-          if (tryOpen()) {
-            clearInterval(interval);
-          } else if (tries > 50) {
-            clearInterval(interval);
-            setStatus((statusEl ? statusEl.textContent : "") + " | Identity widget not ready yet.");
-          }
-        }, 100);
-
-        // After a successful login/signup, send user to the CMS on the custom domain.
-        const onLogin = () =>
-          window.location.replace("https://www.martingriffinbooks.com/admin/");
-        const attachHandlers = () => {
-          if (!window.netlifyIdentity || !window.netlifyIdentity.on) return;
-          window.netlifyIdentity.on("login", onLogin);
-          window.netlifyIdentity.on("signup", onLogin);
-        };
-        attachHandlers();
-        setTimeout(attachHandlers, 500);
+      const auth = new GoTrue({
+        APIUrl: NETLIFY_IDENTITY_API_URL,
+        audience: "",
+        setCookie: false,
       });
+
+      document.getElementById("invite-form").addEventListener("submit", async (e) => {
+        e.preventDefault();
+        if (!inviteToken) {
+          setStatus("Missing invite token. Please use the invite email link again.");
+          return;
+        }
+        const pw = document.getElementById("pw").value;
+        const pw2 = document.getElementById("pw2").value;
+        if (pw !== pw2) {
+          setStatus("Passwords don’t match.");
+          return;
+        }
+        setStatus("Setting password…");
+        try {
+          await auth.acceptInvite(decodeURIComponent(inviteToken), pw, true);
+          setStatus("Done! Redirecting to /admin…");
+          window.location.replace("https://www.martingriffinbooks.com/admin/");
+        } catch (err) {
+          setStatus(err?.message || "Invite failed. Please ask the admin to resend the invite.");
+        }
+      });
+
+      const adminBtn = document.getElementById("go-admin");
+      if (adminBtn)
+        adminBtn.addEventListener("click", () =>
+          window.location.replace("https://www.martingriffinbooks.com/admin/"),
+        );
     </script>
   </body>
 </html>
