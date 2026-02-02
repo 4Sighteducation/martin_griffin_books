@@ -7,7 +7,41 @@
   <title>Content Manager</title>
 </head>
 <body>
+  <!-- Netlify Identity (used by Git Gateway) -->
+  <script defer src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+
   <!-- Include the script that builds the page and powers Decap CMS -->
   <script defer src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+
+  <script>
+    const NETLIFY_IDENTITY_API_URL = "https://martin-griffin-books.netlify.app/.netlify/identity";
+
+    function initNetlifyIdentityWhenReady() {
+      if (!window.netlifyIdentity || !window.netlifyIdentity.init) return false;
+      window.netlifyIdentity.init({ APIUrl: NETLIFY_IDENTITY_API_URL });
+      return true;
+    }
+
+    // Ensure the widget is initialized even if scripts load slowly.
+    window.addEventListener("load", () => {
+      if (initNetlifyIdentityWhenReady()) return;
+      let tries = 0;
+      const interval = setInterval(() => {
+        tries += 1;
+        if (initNetlifyIdentityWhenReady() || tries > 30) clearInterval(interval);
+      }, 100);
+    });
+
+    // After successful login, reload /admin so Decap CMS can continue.
+    if (window.netlifyIdentity) {
+      window.netlifyIdentity.on("init", (user) => {
+        if (!user) {
+          window.netlifyIdentity.on("login", () => {
+            document.location.href = "/admin/";
+          });
+        }
+      });
+    }
+  </script>
 </body>
 </html>

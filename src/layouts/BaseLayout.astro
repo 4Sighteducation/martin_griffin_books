@@ -29,6 +29,24 @@ const { title, description, image, keywords } = Astro.props;
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet" />
     
+    <!--
+      Netlify Identity invites/recovery links include hash tokens (e.g. #invite_token=...).
+      If an email lands on the homepage, automatically forward to /admin and preserve the token.
+    -->
+    <script is:inline>
+      (() => {
+        const hash = window.location.hash || "";
+        const isNetlifyIdentityToken =
+          hash.includes("invite_token=") ||
+          hash.includes("recovery_token=") ||
+          hash.includes("confirmation_token=");
+
+        if (isNetlifyIdentityToken && !window.location.pathname.startsWith("/admin")) {
+          window.location.replace("/admin/" + hash);
+        }
+      })();
+    </script>
+
     <title>{title}</title>
   </head>
   <body class="antialiased bg-white text-gray-900">

@@ -19,38 +19,39 @@ The GitHub repo is ready. To deploy:
 
 To enable Martin to edit content through `/admin`, we need to set up authentication.
 
-### Recommended: GitHub OAuth (Future-proof)
+### Option A: Netlify Identity + Git Gateway (Best editor UX)
 
-Netlify Identity + Git Gateway are deprecated. This project uses **GitHub OAuth** via a small Vercel serverless OAuth proxy (`/api/oauth/*`).
+This project uses **Netlify Identity + Git Gateway** to allow email/password logins and direct publishing from `/admin` without requiring GitHub accounts for editors.
 
-#### Step 1: Create a GitHub OAuth App
+#### Step 1: Create a Netlify site (Identity-only)
 
-In GitHub: **Settings → Developer settings → OAuth Apps → New OAuth App**
+1. Create a Netlify site (it can deploy from this repo; the site itself is only used for Identity/Git Gateway)
+2. Ensure it has a stable Netlify URL, e.g. `https://martin-griffin-books.netlify.app`
 
-- **Application name**: `Martin Griffin Books CMS`
-- **Homepage URL**: `https://www.martingriffinbooks.com`
-- **Authorization callback URL**: `https://www.martingriffinbooks.com/api/oauth/callback`
+#### Step 2: Enable Identity
 
-After creating it, copy:
-- **Client ID**
-- **Client secret**
+Netlify site → **Identity**:
+- Enable Identity
+- Registration: **Invite only**
+- Invite editors by email
 
-#### Step 2: Add Vercel environment variables
+#### Step 3: Enable Git Gateway
 
-In Vercel project → **Settings → Environment Variables** add:
+Netlify site → **Identity → Services → Git Gateway**:
+- Enable Git Gateway
+- Add a **GitHub API access token** if prompted (Git Gateway uses it to commit changes back to GitHub)
 
-- `GITHUB_CLIENT_ID` = (from the GitHub OAuth App)
-- `GITHUB_CLIENT_SECRET` = (from the GitHub OAuth App)
+Recommended token:
+- Fine‑grained PAT, restricted to `4Sighteducation/martin_griffin_books`
+- Permissions: Contents **Read/Write**
 
-Then redeploy (or just push a commit; Vercel will redeploy automatically).
+#### Step 4: Fix invite email links
 
-#### Step 3: Open Authoring (no repo access for editors)
+In Netlify Identity settings, set the **Site URL / External URL** used in emails to:
 
-This project enables **Open Authoring** in Decap CMS. That means editors:
-- Need a GitHub account
-- Do **not** need write access to the repository
+`https://www.martingriffinbooks.com/admin/`
 
-Edits are submitted as pull requests, which you (repo maintainer) review and merge. After merge, Vercel deploys automatically.
+This makes invite links open in the CMS where password setup works.
 
 ---
 

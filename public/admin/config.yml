@@ -1,15 +1,8 @@
 backend:
-  name: github
-  repo: 4Sighteducation/martin_griffin_books
+  name: git-gateway
   branch: main
-  # OAuth proxy hosted on Vercel (see /api/oauth/*)
-  base_url: "https://www.martingriffinbooks.com"
-  auth_endpoint: "api/oauth"
-  # Allow editors without repo write access. Their changes become PRs you approve/merge.
-  open_authoring: true
-  auth_scope: public_repo
-
-publish_mode: editorial_workflow
+  identity_url: "https://martin-griffin-books.netlify.app/.netlify/identity"
+  gateway_url: "https://martin-griffin-books.netlify.app/.netlify/git/github"
 
 media_folder: "public/images"
 public_folder: "/images"
