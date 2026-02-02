@@ -67,11 +67,11 @@
       <form id="invite-form" class="actions" style="margin-top: 12px; flex-direction: column;">
         <label style="width: 100%;">
           <span style="display:block;font-size:12px;color:#6b7280;margin-bottom:6px;">New password</span>
-          <input id="pw" type="password" minlength="8" required style="width:100%;padding:10px;border:1px solid #e5e7eb;border-radius:8px;" />
+          <input id="pw" type="password" minlength="8" required autocomplete="new-password" style="width:100%;padding:10px;border:1px solid #e5e7eb;border-radius:8px;" />
         </label>
         <label style="width: 100%;">
           <span style="display:block;font-size:12px;color:#6b7280;margin-bottom:6px;">Confirm password</span>
-          <input id="pw2" type="password" minlength="8" required style="width:100%;padding:10px;border:1px solid #e5e7eb;border-radius:8px;" />
+          <input id="pw2" type="password" minlength="8" required autocomplete="new-password" style="width:100%;padding:10px;border:1px solid #e5e7eb;border-radius:8px;" />
         </label>
         <button type="submit" style="width:100%;">Set password</button>
         <button id="go-admin" type="button" class="secondary" style="width:100%;">Go to /admin</button>
@@ -80,8 +80,6 @@
     </div>
 
     <script type="module">
-      import GoTrue from "https://cdn.jsdelivr.net/npm/gotrue-js/+esm";
-
       const NETLIFY_IDENTITY_API_URL =
         "https://martin-griffin-books.netlify.app/.netlify/identity";
 
@@ -97,11 +95,19 @@
 
       setStatus(inviteToken ? "Invite token detected." : "Missing invite token.");
 
-      const auth = new GoTrue({
-        APIUrl: NETLIFY_IDENTITY_API_URL,
-        audience: "",
-        setCookie: false,
-      });
+      let auth;
+      try {
+        const mod = await import("https://cdn.jsdelivr.net/npm/gotrue-js@1.3.0/+esm");
+        const GoTrueCtor = mod.default || mod.GoTrue || mod;
+        auth = new GoTrueCtor({
+          APIUrl: NETLIFY_IDENTITY_API_URL,
+          audience: "",
+          setCookie: false,
+        });
+      } catch (err) {
+        setStatus("Failed to load auth library. Please refresh.");
+        console.error(err);
+      }
 
       document.getElementById("invite-form").addEventListener("submit", async (e) => {
         e.preventDefault();
@@ -117,6 +123,10 @@
         }
         setStatus("Setting password…");
         try {
+          if (!auth) {
+            setStatus("Auth library not loaded yet. Please refresh.");
+            return;
+          }
           await auth.acceptInvite(decodeURIComponent(inviteToken), pw, true);
           setStatus("Done! Redirecting to /admin…");
           window.location.replace("https://www.martingriffinbooks.com/admin/");
