@@ -54,6 +54,16 @@
         );
       }
 
+      function getRedirectUrlFromQuery() {
+        try {
+          const params = new URLSearchParams(window.location.search || "");
+          const raw = params.get("redirect") || params.get("confirmation_url") || "";
+          return raw ? decodeURIComponent(raw) : "";
+        } catch {
+          return "";
+        }
+      }
+
       window.addEventListener("DOMContentLoaded", () => {
         // If the invite link was opened via http://, upgrade to https while preserving the hash.
         if (window.location.protocol === "http:") {
@@ -65,6 +75,17 @@
               window.location.hash,
           );
           return;
+        }
+
+        // Some email clients/trackers drop the URL hash (where Netlify stores tokens).
+        // If we were given a redirect URL in the query string, recover the hash from it.
+        const recoveredUrl = getRedirectUrlFromQuery();
+        if (recoveredUrl && !window.location.hash) {
+          const upgraded = recoveredUrl.replace(/^http:\/\//i, "https://");
+          const hashFromUrl = upgraded.includes("#") ? upgraded.slice(upgraded.indexOf("#")) : "";
+          if (hashFromUrl) {
+            window.location.hash = hashFromUrl;
+          }
         }
 
         const hash = window.location.hash || "";
