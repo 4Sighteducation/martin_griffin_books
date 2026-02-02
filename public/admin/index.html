@@ -8,21 +8,33 @@
 </head>
 <body>
   <!-- Netlify Identity (required for Git Gateway auth when hosting CMS outside Netlify) -->
-  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+  <script defer src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 
   <!-- Include the script that builds the page and powers Decap CMS -->
-  <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+  <script defer src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
 
   <script>
+    const NETLIFY_IDENTITY_API_URL = "https://martin-griffin-books.netlify.app/.netlify/identity";
+
     // IMPORTANT: this CMS is hosted on Vercel, but Identity lives on Netlify.
-    // Without explicitly setting APIUrl, the Identity widget tries:
-    //   https://www.martingriffinbooks.com/.netlify/identity
-    // which fails and produces "Unable to access identity settings".
-    if (window.netlifyIdentity && window.netlifyIdentity.init) {
-      window.netlifyIdentity.init({
-        APIUrl: "https://martin-griffin-books.netlify.app/.netlify/identity",
-      });
+    // We must explicitly set the Identity API URL; otherwise the widget defaults to the current origin
+    // (e.g. https://www.martingriffinbooks.com/.netlify/identity) and Decap login appears broken.
+    function initNetlifyIdentityWhenReady() {
+      if (!window.netlifyIdentity || !window.netlifyIdentity.init) return false;
+
+      window.netlifyIdentity.init({ APIUrl: NETLIFY_IDENTITY_API_URL });
+      return true;
     }
+
+    // Ensure the widget is initialized even if scripts load slowly.
+    window.addEventListener("load", () => {
+      if (initNetlifyIdentityWhenReady()) return;
+      let tries = 0;
+      const interval = setInterval(() => {
+        tries += 1;
+        if (initNetlifyIdentityWhenReady() || tries > 30) clearInterval(interval);
+      }, 100);
+    });
 
     // After successful login, reload /admin so Decap CMS can continue.
     if (window.netlifyIdentity) {
