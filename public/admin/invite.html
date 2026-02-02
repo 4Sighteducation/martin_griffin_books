@@ -82,7 +82,12 @@
         // Some email clients/trackers drop the URL hash (where Netlify stores tokens).
         // If we were given a redirect URL in the query string, recover the hash from it.
         const recoveredUrl = getRedirectUrlFromQuery();
-        if (recoveredUrl && !window.location.hash) {
+        // Some clients append a trailing "#" which becomes window.location.hash === "#".
+        // Treat that as "no hash" so we can recover the real token hash from the redirect URL.
+        const hasMeaningfulHash =
+          window.location.hash && window.location.hash !== "#" && window.location.hash.length > 1;
+
+        if (recoveredUrl && !hasMeaningfulHash) {
           // Preserve the token hash from the embedded URL.
           const upgraded = recoveredUrl.replace(/^http:\/\//i, "https://");
           const hashFromUrl =
