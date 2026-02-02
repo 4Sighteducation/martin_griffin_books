@@ -56,9 +56,11 @@
 
       function getRedirectUrlFromQuery() {
         try {
+          // URLSearchParams already returns a decoded string; do NOT decode again
+          // or we may corrupt the embedded URL and lose the hash token.
           const params = new URLSearchParams(window.location.search || "");
           const raw = params.get("redirect") || params.get("confirmation_url") || "";
-          return raw ? decodeURIComponent(raw) : "";
+          return raw || "";
         } catch {
           return "";
         }
@@ -81,8 +83,10 @@
         // If we were given a redirect URL in the query string, recover the hash from it.
         const recoveredUrl = getRedirectUrlFromQuery();
         if (recoveredUrl && !window.location.hash) {
+          // Preserve the token hash from the embedded URL.
           const upgraded = recoveredUrl.replace(/^http:\/\//i, "https://");
-          const hashFromUrl = upgraded.includes("#") ? upgraded.slice(upgraded.indexOf("#")) : "";
+          const hashFromUrl =
+            upgraded.indexOf("#") >= 0 ? upgraded.slice(upgraded.indexOf("#")) : "";
           if (hashFromUrl) {
             window.location.hash = hashFromUrl;
           }
