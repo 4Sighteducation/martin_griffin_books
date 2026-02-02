@@ -16,32 +16,19 @@
   <script>
     const NETLIFY_IDENTITY_API_URL = "https://martin-griffin-books.netlify.app/.netlify/identity";
 
-    function initNetlifyIdentityWhenReady() {
-      if (!window.netlifyIdentity || !window.netlifyIdentity.init) return false;
+    // With deferred scripts, inline JS runs before the Identity widget is available.
+    // Initialize Identity after deferred scripts have executed (DOMContentLoaded).
+    window.addEventListener("DOMContentLoaded", () => {
+      if (!window.netlifyIdentity || !window.netlifyIdentity.init) return;
+
+      // IMPORTANT: /admin is hosted on Vercel, but Identity lives on Netlify.
       window.netlifyIdentity.init({ APIUrl: NETLIFY_IDENTITY_API_URL });
-      return true;
-    }
 
-    // Ensure the widget is initialized even if scripts load slowly.
-    window.addEventListener("load", () => {
-      if (initNetlifyIdentityWhenReady()) return;
-      let tries = 0;
-      const interval = setInterval(() => {
-        tries += 1;
-        if (initNetlifyIdentityWhenReady() || tries > 30) clearInterval(interval);
-      }, 100);
-    });
-
-    // After successful login, reload /admin so Decap CMS can continue.
-    if (window.netlifyIdentity) {
-      window.netlifyIdentity.on("init", (user) => {
-        if (!user) {
-          window.netlifyIdentity.on("login", () => {
-            document.location.href = "/admin/";
-          });
-        }
+      // After successful login, reload /admin so Decap CMS can continue.
+      window.netlifyIdentity.on("login", () => {
+        document.location.href = "/admin/";
       });
-    }
+    });
   </script>
 </body>
 </html>
