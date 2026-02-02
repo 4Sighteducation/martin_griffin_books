@@ -137,9 +137,9 @@
         const hash = window.location.hash || "";
         setStatus(`Detected hash: ${hash || "(none)"} | redirect param: ${recoveredUrl ? "yes" : "no"}`);
 
-        // If we got here without a token, bounce to /admin.
+        // If we got here without a token, bounce to the CMS.
         if (!isTokenHash(hash)) {
-          window.location.replace("/admin/");
+          window.location.replace("https://www.martingriffinbooks.com/admin/");
           return;
         }
 
@@ -170,7 +170,10 @@
         const openBtn = document.getElementById("open-auth");
         if (openBtn) openBtn.addEventListener("click", () => tryOpen());
         const adminBtn = document.getElementById("go-admin");
-        if (adminBtn) adminBtn.addEventListener("click", () => window.location.replace("/admin/"));
+        if (adminBtn)
+          adminBtn.addEventListener("click", () =>
+            window.location.replace("https://www.martingriffinbooks.com/admin/"),
+          );
 
         if (tryOpen()) return;
 
@@ -185,8 +188,9 @@
           }
         }, 100);
 
-        // After a successful login/signup, send user to the CMS.
-        const onLogin = () => window.location.replace("/admin/");
+        // After a successful login/signup, send user to the CMS on the custom domain.
+        const onLogin = () =>
+          window.location.replace("https://www.martingriffinbooks.com/admin/");
         const attachHandlers = () => {
           if (!window.netlifyIdentity || !window.netlifyIdentity.on) return;
           window.netlifyIdentity.on("login", onLogin);
