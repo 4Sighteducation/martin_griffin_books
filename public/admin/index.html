@@ -8,6 +8,12 @@
 </head>
 <body>
   <script>
+    // Ensure trailing slash so config.yml resolves to /admin/config.yml
+    // (without it, relative requests can hit /config.yml and 404).
+    if (window.location.pathname === "/admin") {
+      window.location.replace("/admin/");
+    }
+
     // Netlify Identity invite/confirmation URLs use hash tokens (e.g. #invite_token=...).
     // Decap uses hash routing (#/), which can clobber the token before Identity processes it.
     // If we detect a token hash, route to a dedicated Identity-only page first.
