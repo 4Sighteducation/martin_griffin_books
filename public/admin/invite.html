@@ -31,14 +31,46 @@
         font-size: 14px;
         line-height: 1.4;
       }
+      .actions {
+        display: flex;
+        gap: 12px;
+        margin-top: 14px;
+        align-items: center;
+        flex-wrap: wrap;
+      }
+      button {
+        appearance: none;
+        border: 0;
+        background: #111827;
+        color: white;
+        padding: 10px 14px;
+        border-radius: 10px;
+        font-weight: 600;
+        cursor: pointer;
+      }
+      button.secondary {
+        background: #e5e7eb;
+        color: #111827;
+      }
+      .status {
+        margin-top: 12px;
+        font-size: 12px;
+        color: #6b7280;
+        word-break: break-word;
+      }
     </style>
   </head>
   <body>
     <div class="card">
       <h1>Finishing sign-in…</h1>
       <p>
-        If a login window doesn’t appear, please allow popups and refresh this page.
+        If the sign-in window doesn’t appear automatically, click the button below.
       </p>
+      <div class="actions">
+        <button id="open-auth" type="button">Open sign-in</button>
+        <button id="go-admin" type="button" class="secondary">Go to /admin</button>
+      </div>
+      <div id="status" class="status"></div>
     </div>
 
     <script defer src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
@@ -79,6 +111,11 @@
           return;
         }
 
+        const statusEl = document.getElementById("status");
+        const setStatus = (msg) => {
+          if (statusEl) statusEl.textContent = msg;
+        };
+
         // Some email clients/trackers drop the URL hash (where Netlify stores tokens).
         // If we were given a redirect URL in the query string, recover the hash from it.
         const recoveredUrl = getRedirectUrlFromQuery();
@@ -98,6 +135,7 @@
         }
 
         const hash = window.location.hash || "";
+        setStatus(`Detected hash: ${hash || "(none)"} | redirect param: ${recoveredUrl ? "yes" : "no"}`);
 
         // If we got here without a token, bounce to /admin.
         if (!isTokenHash(hash)) {
@@ -117,19 +155,33 @@
         const maybeReady = () =>
           window.netlifyIdentity && typeof window.netlifyIdentity.open === "function";
 
-        if (maybeReady()) {
-          openIdentity();
-          return;
-        }
+        const tryOpen = () => {
+          try {
+            if (!maybeReady()) return false;
+            openIdentity();
+            return true;
+          } catch (e) {
+            setStatus(`Error opening Identity: ${e && e.message ? e.message : String(e)}`);
+            return false;
+          }
+        };
+
+        // Wire manual buttons (user gesture can help in strict browser settings)
+        const openBtn = document.getElementById("open-auth");
+        if (openBtn) openBtn.addEventListener("click", () => tryOpen());
+        const adminBtn = document.getElementById("go-admin");
+        if (adminBtn) adminBtn.addEventListener("click", () => window.location.replace("/admin/"));
+
+        if (tryOpen()) return;
 
         let tries = 0;
         const interval = setInterval(() => {
           tries += 1;
-          if (maybeReady()) {
+          if (tryOpen()) {
             clearInterval(interval);
-            openIdentity();
           } else if (tries > 50) {
             clearInterval(interval);
+            setStatus((statusEl ? statusEl.textContent : "") + " | Identity widget not ready yet.");
           }
         }, 100);
 
