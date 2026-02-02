@@ -65,6 +65,7 @@
       <h1>Finish setting up your editor login</h1>
       <p>Set a password to activate your invite.</p>
       <form id="invite-form" class="actions" style="margin-top: 12px; flex-direction: column;">
+        <input id="email" name="email" type="email" autocomplete="username" style="display:none" />
         <label style="width: 100%;">
           <span style="display:block;font-size:12px;color:#6b7280;margin-bottom:6px;">New password</span>
           <input id="pw" type="password" minlength="8" required autocomplete="new-password" style="width:100%;padding:10px;border:1px solid #e5e7eb;border-radius:8px;" />
@@ -97,7 +98,7 @@
 
       let auth;
       try {
-        const mod = await import("https://cdn.jsdelivr.net/npm/gotrue-js@1.3.0/+esm");
+        const mod = await import("https://esm.sh/gotrue-js@1.3.0");
         const GoTrueCtor = mod.default || mod.GoTrue || mod;
         auth = new GoTrueCtor({
           APIUrl: NETLIFY_IDENTITY_API_URL,
