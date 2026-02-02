@@ -1,0 +1,106 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex" />
+    <title>Complete sign-in</title>
+    <style>
+      body {
+        font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+        background: #f6f7f9;
+        margin: 0;
+        min-height: 100vh;
+        display: grid;
+        place-items: center;
+      }
+      .card {
+        background: white;
+        padding: 24px;
+        border-radius: 12px;
+        width: min(520px, calc(100vw - 32px));
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+      }
+      h1 {
+        margin: 0 0 8px;
+        font-size: 18px;
+      }
+      p {
+        margin: 0;
+        color: #4b5563;
+        font-size: 14px;
+        line-height: 1.4;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="card">
+      <h1>Finishing sign-in…</h1>
+      <p>
+        If a login window doesn’t appear, please allow popups and refresh this page.
+      </p>
+    </div>
+
+    <script defer src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+    <script>
+      const NETLIFY_IDENTITY_API_URL =
+        "https://martin-griffin-books.netlify.app/.netlify/identity";
+
+      function isTokenHash(hash) {
+        return (
+          hash.includes("invite_token=") ||
+          hash.includes("recovery_token=") ||
+          hash.includes("confirmation_token=")
+        );
+      }
+
+      window.addEventListener("DOMContentLoaded", () => {
+        const hash = window.location.hash || "";
+
+        // If we got here without a token, bounce to /admin.
+        if (!isTokenHash(hash)) {
+          window.location.replace("/admin/");
+          return;
+        }
+
+        const openIdentity = () => {
+          // init is safe to call multiple times
+          window.netlifyIdentity.init({ APIUrl: NETLIFY_IDENTITY_API_URL });
+
+          // Opening the widget here lets it process the token hash.
+          window.netlifyIdentity.open();
+        };
+
+        const maybeReady = () =>
+          window.netlifyIdentity && typeof window.netlifyIdentity.open === "function";
+
+        if (maybeReady()) {
+          openIdentity();
+          return;
+        }
+
+        let tries = 0;
+        const interval = setInterval(() => {
+          tries += 1;
+          if (maybeReady()) {
+            clearInterval(interval);
+            openIdentity();
+          } else if (tries > 50) {
+            clearInterval(interval);
+          }
+        }, 100);
+
+        // After a successful login/signup, send user to the CMS.
+        const onLogin = () => window.location.replace("/admin/");
+        const attachHandlers = () => {
+          if (!window.netlifyIdentity || !window.netlifyIdentity.on) return;
+          window.netlifyIdentity.on("login", onLogin);
+          window.netlifyIdentity.on("signup", onLogin);
+        };
+        attachHandlers();
+        setTimeout(attachHandlers, 500);
+      });
+    </script>
+  </body>
+</html>
+

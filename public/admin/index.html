@@ -7,6 +7,22 @@
   <title>Content Manager</title>
 </head>
 <body>
+  <script>
+    // Netlify Identity invite/confirmation URLs use hash tokens (e.g. #invite_token=...).
+    // Decap uses hash routing (#/), which can clobber the token before Identity processes it.
+    // If we detect a token hash, route to a dedicated Identity-only page first.
+    (function () {
+      var h = window.location.hash || "";
+      if (
+        h.indexOf("invite_token=") !== -1 ||
+        h.indexOf("recovery_token=") !== -1 ||
+        h.indexOf("confirmation_token=") !== -1
+      ) {
+        window.location.replace("/admin/invite.html" + h);
+      }
+    })();
+  </script>
+
   <!-- Netlify Identity (used by Git Gateway) -->
   <script defer src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 

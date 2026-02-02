@@ -31,7 +31,8 @@ const { title, description, image, keywords } = Astro.props;
     
     <!--
       Netlify Identity invites/recovery links include hash tokens (e.g. #invite_token=...).
-      If an email lands on the homepage, automatically forward to /admin and preserve the token.
+      If an email lands on the homepage, forward to an Identity-only page so Decap's hash router
+      doesn't clobber the token.
     -->
     <script is:inline>
       (() => {
@@ -42,7 +43,7 @@ const { title, description, image, keywords } = Astro.props;
           hash.includes("confirmation_token=");
 
         if (isNetlifyIdentityToken && !window.location.pathname.startsWith("/admin")) {
-          window.location.replace("/admin/" + hash);
+          window.location.replace("/admin/invite.html" + hash);
         }
       })();
     </script>
