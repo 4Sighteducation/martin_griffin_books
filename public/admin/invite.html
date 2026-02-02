@@ -130,7 +130,11 @@
           const hashFromUrl =
             upgraded.indexOf("#") >= 0 ? upgraded.slice(upgraded.indexOf("#")) : "";
           if (hashFromUrl) {
-            window.location.hash = hashFromUrl;
+            // Reload with the hash in the URL so the Identity widget can see it at load time.
+            window.location.replace(
+              window.location.pathname + window.location.search + hashFromUrl,
+            );
+            return;
           }
         }
 
