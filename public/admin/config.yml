@@ -18,10 +18,14 @@ collections:
           - {label: "Hero Title", name: "heroTitle", widget: "string", default: "Martin Griffin"}
           - {label: "Hero Subtitle", name: "heroSubtitle", widget: "string", default: "Author of Psychological Thrillers"}
           - {label: "Hero Description", name: "heroDescription", widget: "text"}
+          - {label: "Hero Button Label", name: "heroCtaLabel", widget: "string", default: "Discover the Books"}
           - {label: "About Heading", name: "aboutHeading", widget: "string", default: "About Martin Griffin"}
           - {label: "About Paragraph 1", name: "aboutPara1", widget: "text"}
           - {label: "About Paragraph 2", name: "aboutPara2", widget: "text"}
           - {label: "About Paragraph 3", name: "aboutPara3", widget: "text"}
+          - {label: "Books Section Heading", name: "booksHeading", widget: "string", default: "The Novels"}
+          - {label: "Footer Line 1", name: "footerLine1", widget: "string", default: "© {{year}} Martin Griffin. All rights reserved."}
+          - {label: "Footer Line 2", name: "footerLine2", widget: "string", default: "Website designed with care for readers worldwide."}
       
       - label: "Contact Information"
         name: "contact"
@@ -34,6 +38,10 @@ collections:
     label: "Books"
     folder: "src/content/books"
     create: true
+    extension: "json"
+    format: "json"
+    identifier_field: "title"
+    summary: "{{title}}"
     slug: "{{slug}}"
     fields:
       - {label: "Title", name: "title", widget: "string"}
@@ -55,6 +63,14 @@ collections:
           - {label: "Image", name: "image", widget: "image"}
           - {label: "Caption", name: "caption", widget: "string"}
           - {label: "Alt Text", name: "alt", widget: "string"}
+      - label: "Reviews"
+        name: "reviews"
+        widget: "list"
+        required: false
+        fields:
+          - {label: "Quote", name: "quote", widget: "text"}
+          - {label: "Author", name: "author", widget: "string"}
+          - {label: "Source", name: "source", widget: "string", required: false}
 
   - name: "settings"
     label: "Site Settings"

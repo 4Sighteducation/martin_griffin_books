@@ -11,6 +11,7 @@ import lastVisitorData from '../content/books/the-last-visitor.json';
 
 // Load homepage content
 import homepageContent from '../content/homepage.json';
+import contactContent from '../content/contact.json';
 ---
 
 <BaseLayout 
@@ -45,7 +46,7 @@ import homepageContent from '../content/homepage.json';
         href="#books" 
         class="inline-block bg-accent hover:bg-accent-dark text-white font-semibold px-8 py-4 rounded-lg transition-all transform hover:scale-105 shadow-lg hover:shadow-xl"
       >
-        Discover the Books
+        {homepageContent.heroCtaLabel}
       </a>
     </div>
 
@@ -86,7 +87,7 @@ import homepageContent from '../content/homepage.json';
   <section id="books" class="py-20 bg-gradient-to-b from-gray-50 to-white">
     <div class="container mx-auto px-6">
       <h2 class="text-4xl md:text-5xl font-bold text-center mb-16 text-primary-700">
-        The Novels
+        {homepageContent.booksHeading}
       </h2>
 
       <!-- The Second Stranger -->
@@ -240,10 +241,10 @@ import homepageContent from '../content/homepage.json';
     <div class="container mx-auto px-6">
       <div class="max-w-2xl mx-auto">
         <h2 class="text-4xl md:text-5xl font-bold text-center mb-8">
-          Get in Touch
+          {contactContent.heading}
         </h2>
         <p class="text-xl text-center mb-12 text-accent-light">
-          Have a question or want to connect? Send a message below.
+          {contactContent.description}
         </p>
         
         <ContactForm />
@@ -254,10 +255,10 @@ import homepageContent from '../content/homepage.json';
   <!-- Footer -->
   <footer class="bg-primary-900 text-white py-12">
     <div class="container mx-auto px-6 text-center">
-      <p class="text-lg mb-4">© {new Date().getFullYear()} Martin Griffin. All rights reserved.</p>
-      <p class="text-sm text-accent-light">
-        Website designed with care for readers worldwide.
+      <p class="text-lg mb-4">
+        {homepageContent.footerLine1.replace("{{year}}", String(new Date().getFullYear()))}
       </p>
+      <p class="text-sm text-accent-light">{homepageContent.footerLine2}</p>
     </div>
   </footer>
 </BaseLayout>
