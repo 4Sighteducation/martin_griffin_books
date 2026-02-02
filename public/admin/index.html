@@ -12,6 +12,18 @@
     // Decap uses hash routing (#/), which can clobber the token before Identity processes it.
     // If we detect a token hash, route to a dedicated Identity-only page first.
     (function () {
+      // If the link was opened via http://, upgrade to https while preserving the hash.
+      if (window.location.protocol === "http:") {
+        window.location.replace(
+          "https://" +
+            window.location.host +
+            window.location.pathname +
+            window.location.search +
+            window.location.hash
+        );
+        return;
+      }
+
       var h = window.location.hash || "";
       if (
         h.indexOf("invite_token=") !== -1 ||

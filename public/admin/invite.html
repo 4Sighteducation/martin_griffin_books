@@ -55,6 +55,18 @@
       }
 
       window.addEventListener("DOMContentLoaded", () => {
+        // If the invite link was opened via http://, upgrade to https while preserving the hash.
+        if (window.location.protocol === "http:") {
+          window.location.replace(
+            "https://" +
+              window.location.host +
+              window.location.pathname +
+              window.location.search +
+              window.location.hash,
+          );
+          return;
+        }
+
         const hash = window.location.hash || "";
 
         // If we got here without a token, bounce to /admin.
@@ -68,7 +80,8 @@
           window.netlifyIdentity.init({ APIUrl: NETLIFY_IDENTITY_API_URL });
 
           // Opening the widget here lets it process the token hash.
-          window.netlifyIdentity.open();
+          // Use the signup view so invite/password flows don't land on the login form.
+          window.netlifyIdentity.open("signup");
         };
 
         const maybeReady = () =>

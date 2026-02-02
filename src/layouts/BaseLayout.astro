@@ -36,6 +36,19 @@ const { title, description, image, keywords } = Astro.props;
     -->
     <script is:inline>
       (() => {
+        // Some Identity emails link to http://... which can cause the hash fragment to get lost.
+        // Upgrade to https in-browser while preserving the hash token.
+        if (window.location.protocol === "http:") {
+          window.location.replace(
+            "https://" +
+              window.location.host +
+              window.location.pathname +
+              window.location.search +
+              window.location.hash,
+          );
+          return;
+        }
+
         const hash = window.location.hash || "";
         const isNetlifyIdentityToken =
           hash.includes("invite_token=") ||
