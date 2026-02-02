@@ -19,35 +19,38 @@ The GitHub repo is ready. To deploy:
 
 To enable Martin to edit content through `/admin`, we need to set up authentication.
 
-### Option A: Netlify Identity (Recommended for Simplicity)
+### Recommended: GitHub OAuth (Future-proof)
 
-1. **Create a free Netlify account** at [netlify.com](https://netlify.com)
-2. **Create a new site** (just for Identity - we're still hosting on Vercel)
-3. **Enable Identity**:
-   - Go to **Site Settings** → **Identity**
-   - Click **Enable Identity**
-4. **Enable Git Gateway**:
-   - In Identity settings, go to **Services** → **Git Gateway**
-   - Click **Enable Git Gateway**
-5. **Invite Martin**:
-   - Go to **Identity** tab
-   - Click **Invite users**
-   - Enter Martin's email
-6. **Get the Identity URL**:
-   - Copy the API endpoint (looks like: `https://your-site.netlify.app/.netlify/identity`)
-7. **Add to Vercel**:
-   - In Vercel project settings → **Environment Variables**
-   - Add: `NETLIFY_IDENTITY_URL` = (the URL you copied)
-   - Redeploy the site
+Netlify Identity + Git Gateway are deprecated. This project uses **GitHub OAuth** via a small Vercel serverless OAuth proxy (`/api/oauth/*`).
 
-### Option B: GitHub OAuth (More Technical)
+#### Step 1: Create a GitHub OAuth App
 
-1. Create a GitHub OAuth App
-2. Configure the callback URL
-3. Add credentials to Vercel
-4. Update `public/admin/config.yml`
+In GitHub: **Settings → Developer settings → OAuth Apps → New OAuth App**
 
-**Netlify Identity is easier and free!**
+- **Application name**: `Martin Griffin Books CMS`
+- **Homepage URL**: `https://www.martingriffinbooks.com`
+- **Authorization callback URL**: `https://www.martingriffinbooks.com/api/oauth/callback`
+
+After creating it, copy:
+- **Client ID**
+- **Client secret**
+
+#### Step 2: Add Vercel environment variables
+
+In Vercel project → **Settings → Environment Variables** add:
+
+- `GITHUB_CLIENT_ID` = (from the GitHub OAuth App)
+- `GITHUB_CLIENT_SECRET` = (from the GitHub OAuth App)
+
+Then redeploy (or just push a commit; Vercel will redeploy automatically).
+
+#### Step 3: Give editors GitHub access
+
+Anyone who will use `/admin` must:
+- Have a GitHub account
+- Be invited as a collaborator to `4Sighteducation/martin_griffin_books` with **write** access
+
+Then they can log in at `https://www.martingriffinbooks.com/admin/`.
 
 ---
 

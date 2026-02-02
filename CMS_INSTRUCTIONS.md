@@ -49,7 +49,7 @@ For example: `https://www.martingriffinbooks.com/admin`
 ## 🎯 How to Make Edits
 
 1. **Go to `/admin`** on your website
-2. **Log in** with your GitHub account (Netlify Identity or GitHub OAuth)
+2. **Log in** with your GitHub account
 3. **Click on the section** you want to edit (Homepage, Books, etc.)
 4. **Make your changes** in the editor
 5. **Click "Save"** - this will automatically:
@@ -97,16 +97,12 @@ When uploading images:
 
 ## 🔧 Setting Up (One-Time Setup)
 
-### Step 1: Enable Netlify Identity on Vercel
+### GitHub login (one-time setup)
 
-1. In your Vercel project, go to **Settings** → **Environment Variables**
-2. Add a new environment variable:
-   - **Name**: `NETLIFY_IDENTITY_URL`
-   - **Value**: (We'll set this up together)
+To use the admin panel, you need:
 
-### Step 2: Enable GitHub OAuth (Alternative)
-
-Or we can set up GitHub authentication so you log in with your GitHub account.
+1. A GitHub account
+2. To be invited to the website's GitHub repository with write access
 
 **Tony will help you with the initial setup!**
 

@@ -1,8 +1,10 @@
 backend:
-  name: git-gateway
+  name: github
+  repo: 4Sighteducation/martin_griffin_books
   branch: main
-  identity_url: "https://martin-griffin-books.netlify.app/.netlify/identity"
-  gateway_url: "https://martin-griffin-books.netlify.app/.netlify/git/github"
+  # OAuth proxy hosted on Vercel (see /api/oauth/*)
+  base_url: "https://www.martingriffinbooks.com"
+  auth_endpoint: "api/oauth"
 
 media_folder: "public/images"
 public_folder: "/images"
