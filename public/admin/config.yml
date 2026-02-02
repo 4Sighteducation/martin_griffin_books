@@ -5,6 +5,11 @@ backend:
   # OAuth proxy hosted on Vercel (see /api/oauth/*)
   base_url: "https://www.martingriffinbooks.com"
   auth_endpoint: "api/oauth"
+  # Allow editors without repo write access. Their changes become PRs you approve/merge.
+  open_authoring: true
+  auth_scope: public_repo
+
+publish_mode: editorial_workflow
 
 media_folder: "public/images"
 public_folder: "/images"

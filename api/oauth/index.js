@@ -35,7 +35,9 @@ export default async function handler(req, res) {
   const state = randomState();
 
   // Decap usually sends provider=github. We only support GitHub here.
-  const scope = typeof req.query.scope === "string" ? req.query.scope : "repo";
+  // For public repos, Open Authoring can work with `public_repo`. (Private repos would need `repo`.)
+  const scope =
+    typeof req.query.scope === "string" ? req.query.scope : "public_repo";
 
   // Store state in a short-lived cookie to mitigate CSRF.
   res.setHeader(

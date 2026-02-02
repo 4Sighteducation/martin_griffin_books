@@ -52,10 +52,9 @@ For example: `https://www.martingriffinbooks.com/admin`
 2. **Log in** with your GitHub account
 3. **Click on the section** you want to edit (Homepage, Books, etc.)
 4. **Make your changes** in the editor
-5. **Click "Save"** - this will automatically:
-   - Commit the changes to GitHub
-   - Trigger a new build on Vercel
-   - Update your live website in 1-2 minutes
+5. **Click "Save"** to keep working, then **move your changes to "Ready"** when you're done.
+6. Your changes will automatically create a **Pull Request** for Tony to review and merge.
+7. After Tony merges, Vercel will rebuild and your live website will update (usually 1-2 minutes).
 
 ---
 
@@ -102,7 +101,7 @@ When uploading images:
 To use the admin panel, you need:
 
 1. A GitHub account
-2. To be invited to the website's GitHub repository with write access
+2. To be invited by Tony to use the CMS (no repository access is required)
 
 **Tony will help you with the initial setup!**
 

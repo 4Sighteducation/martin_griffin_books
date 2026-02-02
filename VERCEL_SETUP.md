@@ -44,13 +44,13 @@ In Vercel project → **Settings → Environment Variables** add:
 
 Then redeploy (or just push a commit; Vercel will redeploy automatically).
 
-#### Step 3: Give editors GitHub access
+#### Step 3: Open Authoring (no repo access for editors)
 
-Anyone who will use `/admin` must:
-- Have a GitHub account
-- Be invited as a collaborator to `4Sighteducation/martin_griffin_books` with **write** access
+This project enables **Open Authoring** in Decap CMS. That means editors:
+- Need a GitHub account
+- Do **not** need write access to the repository
 
-Then they can log in at `https://www.martingriffinbooks.com/admin/`.
+Edits are submitted as pull requests, which you (repo maintainer) review and merge. After merge, Vercel deploys automatically.
 
 ---
 
