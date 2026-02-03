@@ -1,17 +1,17 @@
 {
-  "heroTitle": "Martin Griffin",
-  "heroSubtitle": "Author of Psychological Thrillers.",
+  "heroQuoteColor": "yellow",
+  "footerLine1": "© {{year}} Martin Griffin. All rights reserved.",
   "heroDescription": "Dive into worlds where nothing is as it seems, and every page turns with unexpected revelations.",
-  "heroCtaLabel": "Discover the Books",
-  "heroQuoteLine1": "\"tense and absorbing... stylishly written... breathtaking.\"",
-  "heroQuoteLine2": "The Wall Street Journal",
-  "heroQuoteAttribution": "Thriller Writer, The Second Stranger, The Last Visitor",
-  "heroQuoteColor": "accent",
-  "aboutHeading": "About Martin Griffin",
+  "footerLine2": "Website designed with care for readers worldwide.",
   "aboutPara1": "Martin Griffin is an acclaimed author of thrillers whose work has been translated into multiple languages. He lives in Manchester, UK, with his wife and daughter.  ",
   "aboutPara2": "The Second Stranger (2023) was followed by The Last Visitor (2024). His third novel will be published in November 2026.",
   "aboutPara3": "He is currently working on his fourth.",
+  "heroSubtitle": "Author of Psychological Thrillers.",
+  "aboutHeading": "About Martin Griffin",
   "booksHeading": "The Novels",
-  "footerLine1": "© {{year}} Martin Griffin. All rights reserved.",
-  "footerLine2": "Website designed with care for readers worldwide."
+  "heroQuoteLine1": "\"tense and absorbing... stylishly written... breathtaking.\"",
+  "heroQuoteLine2": "The Wall Street Journal",
+  "heroQuoteAttribution": "Thriller Writer, The Second Stranger, The Last Visitor",
+  "heroCtaLabel": "Discover the Books",
+  "heroTitle": "Martin Griffin"
 }
