@@ -1,31 +1,31 @@
 {
-  "title": "The Last Visitor",
-  "order": 2,
-  "coverImage": "/images/last-visitor-uk.jpg",
-  "tagline": "The island was abandoned for fifty years. So how did the body get there?",
-  "description1": "Five hundred kilometres out in the Atlantic Ocean lies an island. The last in its tiny archipelago, Navigaceo contains only empty caves, an abandoned lighthouse and a colony of seals. The last time anyone set foot there was 1971.\n\nUntil now. A team of research scientists, accompanied by Quin Macfarlane, a documentary filmmaker, are the first in recent memory to explore the island's tangled forests.",
-  "description2": "But on arrival, Quin makes a devastating discovery; while filming, she spots a body in a cove at the foot of the treacherous cliffs. And although nobody has been on Navigaceo for half a century, the corpse has all the markers of a recent death . . .",
-  "description3": "Each member of the research team has secrets. More than one of them could be a murderer. It's five days until they will be returned to the mainland. And Quin knows if she's not careful, there could be another body on the shore by morning.",
-  "amazonUK": "https://www.amazon.co.uk/Last-Visitor-Martin-Griffin/dp/1408714280",
   "amazonUS": "https://www.amazon.com/Last-Visitor-Martin-Griffin/dp/1408714280",
-  "hasSlideshow": true,
+  "coverImage": "/images/last-visitor-uk.jpg",
   "slideshowImages": [
     {
       "image": "/images/last-visitor-uk.jpg",
-      "caption": "",
+      "caption": "The Last Visitor - UK Edition",
       "alt": "The Last Visitor - UK Edition"
     },
     {
       "image": "/images/last-visitor-us.png",
-      "caption": "",
+      "caption": "The Last Visitor - US Edition",
       "alt": "The Last Visitor - US Edition"
     },
     {
       "image": "/images/last-visitor-de.png",
-      "caption": "",
+      "caption": "The Last Visitor - German Edition",
       "alt": "The Last Visitor - German Edition"
     }
   ],
+  "tagline": "The island was abandoned for fifty years. So how did the body get there?",
+  "order": 2,
+  "hasSlideshow": true,
+  "description1": "Five hundred kilometres out in the Atlantic Ocean lies an island. The last in its tiny archipelago, Navigaceo contains only empty caves, an abandoned lighthouse and a colony of seals. The last time anyone set foot there was 1971.\n\nUntil now. A team of research scientists, accompanied by Quin Macfarlane, a documentary filmmaker, are the first in recent memory to explore the island's tangled forests.",
+  "description2": "But on arrival, Quin makes a devastating discovery; while filming, she spots a body in a cove at the foot of the treacherous cliffs. And although nobody has been on Navigaceo for half a century, the corpse has all the markers of a recent death . . .",
+  "description3": "Each member of the research team has secrets. More than one of them could be a murderer. It's five days until they will be returned to the mainland. And Quin knows if she's not careful, there could be another body on the shore by morning.",
+  "title": "The Last Visitor",
+  "amazonUK": "https://www.amazon.co.uk/Second-Stranger-detective-murderer-which-ebook/dp/B09QZRV9HZ/ref=sr_1_1?crid=2OH8UDB6918M4&dib=eyJ2IjoiMSJ9.pWXkRfO1Byi5OLrqkX7CGVKu2m0-CaPdUueqIaeZOkIEbkCxT3jix7t4QjHQrufeeDsFOuCUDBLWmA5usa514fGO_wp9Q5wC8WpDRiTBG8hq7qo6mdLIgTE9S7zZCa44FI1VN7ylFSr8DJkpfagG8Q.9tLfTp8bE1A_6Ee3BZ7s_XwPdJ5R3Zbo-CqdHpbWgOY&dib_tag=se&keywords=second+stranger&qid=1770152534&s=books&sprefix=second+stranger%2Cstripbooks%2C107&sr=1-1",
   "reviews": [
     {
       "quote": "Tense and absorbing . . . The Last Visitor is reminiscent of Agatha Christie's And Then There Were None, but Mr. Griffin's stylishly written white-knuckler, which culminates in a breathtaking abandoned-lighthouse sequence, creates an atmosphere all its own.",
