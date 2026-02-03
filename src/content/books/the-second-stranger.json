@@ -1,14 +1,6 @@
 {
-  "title": "The Second Stranger",
-  "order": 1,
+  "amazonUS": "https://www.amazon.com/Second-Stranger-Martin-Griffin/dp/1408725231",
   "coverImage": "/images/second-stranger-uk.jpg",
-  "tagline": "Fresh, gripping and addictive! An absolute gem",
-  "description1": "Remie Yorke has one shift left at the Mackinnon Hotel in the remote Scottish Highlands before she leaves for good. Then Storm Ezra hits.\n\nAs temperatures plummet and phone lines go down, an injured man stumbles inside. PC Don Gaines was in a terrible accident on the mountain road. The only other survivor: the prisoner his team was transporting.",
-  "description2": "When a second stranger arrives, Remie reluctantly lets him in from the blizzard. He, too, is hurt. He claims to be a police officer. His name is also Don Gaines.",
-  "description3": "Someone is lying and, with no means of escape, Remie must work out who. If the cold doesn't kill her, one of these men will get there first . . .",
-  "amazonUK": "https://www.amazon.co.uk/Second-Stranger-Martin-Griffin/dp/1408714299",
-  "amazonUS": "https://www.amazon.com/Second-Stranger-Martin-Griffin/dp/1408714299",
-  "hasSlideshow": true,
   "slideshowImages": [
     {
       "image": "/images/second-stranger-uk.jpg",
@@ -21,6 +13,14 @@
       "alt": "The Second Stranger - US Edition"
     }
   ],
+  "tagline": "Fresh, gripping and addictive! An absolute gem",
+  "order": 1,
+  "hasSlideshow": true,
+  "description1": "Remie Yorke has one shift left at the Mackinnon Hotel in the remote Scottish Highlands before she leaves for good. Then Storm Ezra hits.\n\nAs temperatures plummet and phone lines go down, an injured man stumbles inside. PC Don Gaines was in a terrible accident on the mountain road. The only other survivor: the prisoner his team was transporting.",
+  "description2": "When a second stranger arrives, Remie reluctantly lets him in from the blizzard. He, too, is hurt. He claims to be a police officer. His name is also Don Gaines.",
+  "description3": "Someone is lying and, with no means of escape, Remie must work out who. If the cold doesn't kill her, one of these men will get there first . . .",
+  "title": "The Second Stranger",
+  "amazonUK": "https://www.amazon.com/Second-Stranger-Martin-Griffin/dp/1408725231",
   "reviews": [
     {
       "quote": "Clever and bold. The Second Stranger starts with a shiver of dangerous uncertainty before exploding into full on murder and mayhem. Anything you think you know, you don't.",
