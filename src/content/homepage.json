@@ -1,13 +1,13 @@
 {
-  "heroTitle": "Martin Griffin",
-  "heroSubtitle": "Author of Psychological Thrillers.",
-  "heroDescription": "Dive into worlds where nothing is as it seems, and every page turns with unexpected revelations.",
-  "heroCtaLabel": "Discover the Books",
-  "aboutHeading": "About Martin Griffin",
+  "footerLine1": "© {{year}} Martin Griffin. All rights reserved.",
+  "heroDescription": "The Second Stranger (2023) The Last Visitor (2024)",
+  "footerLine2": "Website designed with care for readers worldwide.",
   "aboutPara1": "Martin Griffin is an acclaimed author of psychological thrillers that explore the depths of human nature and the darkness that lurks beneath ordinary lives.",
   "aboutPara2": "With a talent for creating atmospheric tension and unforgettable characters, Martin's novels have captivated readers around the world. His work has been translated into multiple languages and continues to earn critical acclaim.",
   "aboutPara3": "When not writing, Martin enjoys exploring the landscapes that inspire his stories, from remote coastal towns to the wild moorlands of Britain.",
+  "heroSubtitle": "Thriller Writer",
+  "aboutHeading": "About Martin Griffin",
   "booksHeading": "The Novels",
-  "footerLine1": "© {{year}} Martin Griffin. All rights reserved.",
-  "footerLine2": "Website designed with care for readers worldwide."
+  "heroCtaLabel": "Discover the Books",
+  "heroTitle": "Martin Griffin"
 }
