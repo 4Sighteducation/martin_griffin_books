@@ -12,6 +12,37 @@ import lastVisitorData from '../content/books/the-last-visitor.json';
 // Load homepage content
 import homepageContent from '../content/homepage.json';
 import contactContent from '../content/contact.json';
+
+const heroTitleSizeClasses = {
+  xl: "text-5xl md:text-7xl lg:text-8xl",
+  lg: "text-4xl md:text-6xl lg:text-7xl",
+  md: "text-3xl md:text-5xl lg:text-6xl",
+};
+
+const heroSubtitleSizeClasses = {
+  xl: "text-2xl md:text-3xl lg:text-4xl",
+  lg: "text-xl md:text-2xl lg:text-3xl",
+  md: "text-lg md:text-xl lg:text-2xl",
+};
+
+const heroColorClasses = {
+  white: "text-white",
+  yellow: "text-yellow-300",
+  accent: "text-accent-light",
+  muted: "text-gray-200",
+};
+
+const headingSizeClasses = {
+  xl: "text-4xl md:text-5xl",
+  lg: "text-3xl md:text-4xl",
+  md: "text-2xl md:text-3xl",
+};
+
+const headingColorClasses = {
+  primary: "text-primary-700",
+  yellow: "text-yellow-500",
+  dark: "text-primary-900",
+};
 ---
 
 <BaseLayout 
@@ -33,7 +64,11 @@ import contactContent from '../content/contact.json';
 
     <!-- Content -->
     <div class="relative z-10 container mx-auto px-6 py-20 text-center text-white">
-      <h1 class="text-5xl md:text-7xl lg:text-8xl font-bold mb-6 animate-fade-in">
+      <h1
+        class={`${heroTitleSizeClasses[homepageContent.heroTitleSize || "xl"]} ${
+          heroColorClasses[homepageContent.heroTitleColor || "white"]
+        } font-bold mb-6 animate-fade-in`}
+      >
         {homepageContent.heroTitle}
       </h1>
       {homepageContent.heroQuoteLine1 && (
@@ -58,7 +93,11 @@ import contactContent from '../content/contact.json';
           {homepageContent.heroQuoteAttribution}
         </p>
       )}
-      <p class="text-2xl md:text-3xl lg:text-4xl font-light mb-8 text-accent-light">
+      <p
+        class={`${heroSubtitleSizeClasses[homepageContent.heroSubtitleSize || "xl"]} ${
+          heroColorClasses[homepageContent.heroSubtitleColor || "accent"]
+        } font-light mb-8`}
+      >
         {homepageContent.heroSubtitle}
       </p>
       <p class="text-lg md:text-xl max-w-2xl mx-auto mb-12 leading-relaxed">
@@ -85,7 +124,11 @@ import contactContent from '../content/contact.json';
     <div class="container mx-auto px-6">
       <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center">
         <div class="order-2 md:order-1">
-          <h2 class="text-4xl md:text-5xl font-bold mb-6 text-primary-700">
+          <h2
+            class={`${headingSizeClasses[homepageContent.aboutHeadingSize || "xl"]} ${
+              headingColorClasses[homepageContent.aboutHeadingColor || "primary"]
+            } font-bold mb-6`}
+          >
             {homepageContent.aboutHeading}
           </h2>
           <div class="prose prose-lg text-gray-700 leading-relaxed space-y-4">
@@ -108,7 +151,11 @@ import contactContent from '../content/contact.json';
   <!-- Books Section -->
   <section id="books" class="py-20 bg-gradient-to-b from-gray-50 to-white">
     <div class="container mx-auto px-6">
-      <h2 class="text-4xl md:text-5xl font-bold text-center mb-16 text-primary-700">
+      <h2
+        class={`${headingSizeClasses[homepageContent.booksHeadingSize || "xl"]} ${
+          headingColorClasses[homepageContent.booksHeadingColor || "primary"]
+        } font-bold text-center mb-16`}
+      >
         {homepageContent.booksHeading}
       </h2>
 
@@ -262,7 +309,11 @@ import contactContent from '../content/contact.json';
   <section id="contact" class="py-20 bg-gradient-to-b from-primary-700 to-primary-900 text-white">
     <div class="container mx-auto px-6">
       <div class="max-w-2xl mx-auto">
-        <h2 class="text-4xl md:text-5xl font-bold text-center mb-8">
+        <h2
+          class={`${headingSizeClasses[contactContent.headingSize || "xl"]} ${
+            heroColorClasses[contactContent.headingColor || "white"]
+          } font-bold text-center mb-8`}
+        >
           {contactContent.heading}
         </h2>
         <p class="text-xl text-center mb-12 text-accent-light">

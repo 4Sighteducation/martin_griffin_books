@@ -1,4 +1,6 @@
 {
   "heading": "Get in Touch",
-  "description": "Have a question or want to connect? Send a message below."
+  "description": "Have a question or want to connect? Send a message below.",
+  "headingColor": "white",
+  "headingSize": "xl"
 }

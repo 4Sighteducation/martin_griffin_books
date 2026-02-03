@@ -19,6 +19,44 @@ collections:
           - {label: "Hero Subtitle", name: "heroSubtitle", widget: "string", default: "Author of Psychological Thrillers"}
           - {label: "Hero Description", name: "heroDescription", widget: "text"}
           - {label: "Hero Button Label", name: "heroCtaLabel", widget: "string", default: "Discover the Books"}
+          - label: "Hero Title Color"
+            name: "heroTitleColor"
+            widget: "select"
+            required: false
+            default: "white"
+            options:
+              - {label: "White", value: "white"}
+              - {label: "Yellow", value: "yellow"}
+              - {label: "Accent (Light Blue)", value: "accent"}
+              - {label: "Muted (Gray)", value: "muted"}
+          - label: "Hero Title Size"
+            name: "heroTitleSize"
+            widget: "select"
+            required: false
+            default: "xl"
+            options:
+              - {label: "Large", value: "xl"}
+              - {label: "Medium", value: "lg"}
+              - {label: "Small", value: "md"}
+          - label: "Hero Subtitle Color"
+            name: "heroSubtitleColor"
+            widget: "select"
+            required: false
+            default: "accent"
+            options:
+              - {label: "Accent (Light Blue)", value: "accent"}
+              - {label: "Yellow", value: "yellow"}
+              - {label: "White", value: "white"}
+              - {label: "Muted (Gray)", value: "muted"}
+          - label: "Hero Subtitle Size"
+            name: "heroSubtitleSize"
+            widget: "select"
+            required: false
+            default: "xl"
+            options:
+              - {label: "Large", value: "xl"}
+              - {label: "Medium", value: "lg"}
+              - {label: "Small", value: "md"}
           - {label: "Hero Quote Line 1", name: "heroQuoteLine1", widget: "string", required: false}
           - {label: "Hero Quote Line 2", name: "heroQuoteLine2", widget: "string", required: false}
           - {label: "Hero Quote Attribution", name: "heroQuoteAttribution", widget: "string", required: false}
@@ -33,10 +71,46 @@ collections:
               - {label: "White", value: "white"}
               - {label: "Muted (Gray)", value: "muted"}
           - {label: "About Heading", name: "aboutHeading", widget: "string", default: "About Martin Griffin"}
+          - label: "About Heading Color"
+            name: "aboutHeadingColor"
+            widget: "select"
+            required: false
+            default: "primary"
+            options:
+              - {label: "Primary", value: "primary"}
+              - {label: "Yellow", value: "yellow"}
+              - {label: "Dark", value: "dark"}
+          - label: "About Heading Size"
+            name: "aboutHeadingSize"
+            widget: "select"
+            required: false
+            default: "xl"
+            options:
+              - {label: "Large", value: "xl"}
+              - {label: "Medium", value: "lg"}
+              - {label: "Small", value: "md"}
           - {label: "About Paragraph 1", name: "aboutPara1", widget: "text"}
           - {label: "About Paragraph 2", name: "aboutPara2", widget: "text"}
           - {label: "About Paragraph 3", name: "aboutPara3", widget: "text"}
           - {label: "Books Section Heading", name: "booksHeading", widget: "string", default: "The Novels"}
+          - label: "Books Heading Color"
+            name: "booksHeadingColor"
+            widget: "select"
+            required: false
+            default: "primary"
+            options:
+              - {label: "Primary", value: "primary"}
+              - {label: "Yellow", value: "yellow"}
+              - {label: "Dark", value: "dark"}
+          - label: "Books Heading Size"
+            name: "booksHeadingSize"
+            widget: "select"
+            required: false
+            default: "xl"
+            options:
+              - {label: "Large", value: "xl"}
+              - {label: "Medium", value: "lg"}
+              - {label: "Small", value: "md"}
           - {label: "Footer Line 1", name: "footerLine1", widget: "string", default: "© {{year}} Martin Griffin. All rights reserved."}
           - {label: "Footer Line 2", name: "footerLine2", widget: "string", default: "Website designed with care for readers worldwide."}
       
@@ -46,6 +120,24 @@ collections:
         fields:
           - {label: "Contact Heading", name: "heading", widget: "string", default: "Get in Touch"}
           - {label: "Contact Description", name: "description", widget: "text"}
+          - label: "Contact Heading Color"
+            name: "headingColor"
+            widget: "select"
+            required: false
+            default: "white"
+            options:
+              - {label: "White", value: "white"}
+              - {label: "Yellow", value: "yellow"}
+              - {label: "Accent (Light Blue)", value: "accent"}
+          - label: "Contact Heading Size"
+            name: "headingSize"
+            widget: "select"
+            required: false
+            default: "xl"
+            options:
+              - {label: "Large", value: "xl"}
+              - {label: "Medium", value: "lg"}
+              - {label: "Small", value: "md"}
 
   - name: "books"
     label: "Books"
