@@ -19,6 +19,19 @@ collections:
           - {label: "Hero Subtitle", name: "heroSubtitle", widget: "string", default: "Author of Psychological Thrillers"}
           - {label: "Hero Description", name: "heroDescription", widget: "text"}
           - {label: "Hero Button Label", name: "heroCtaLabel", widget: "string", default: "Discover the Books"}
+          - {label: "Hero Quote Line 1", name: "heroQuoteLine1", widget: "string", required: false}
+          - {label: "Hero Quote Line 2", name: "heroQuoteLine2", widget: "string", required: false}
+          - {label: "Hero Quote Attribution", name: "heroQuoteAttribution", widget: "string", required: false}
+          - label: "Hero Quote Color"
+            name: "heroQuoteColor"
+            widget: "select"
+            required: false
+            default: "accent"
+            options:
+              - {label: "Accent (Light Blue)", value: "accent"}
+              - {label: "Yellow", value: "yellow"}
+              - {label: "White", value: "white"}
+              - {label: "Muted (Gray)", value: "muted"}
           - {label: "About Heading", name: "aboutHeading", widget: "string", default: "About Martin Griffin"}
           - {label: "About Paragraph 1", name: "aboutPara1", widget: "text"}
           - {label: "About Paragraph 2", name: "aboutPara2", widget: "text"}
