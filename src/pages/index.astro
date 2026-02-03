@@ -43,6 +43,12 @@ const headingColorClasses = {
   yellow: "text-yellow-500",
   dark: "text-primary-900",
 };
+
+const pickClass = <T extends Record<string, string>>(
+  map: T,
+  key: string | undefined,
+  fallback: keyof T,
+) => (key && key in map ? map[key as keyof T] : map[fallback]);
 ---
 
 <BaseLayout 
@@ -65,8 +71,8 @@ const headingColorClasses = {
     <!-- Content -->
     <div class="relative z-10 container mx-auto px-6 py-20 text-center text-white">
       <h1
-        class={`${heroTitleSizeClasses[homepageContent.heroTitleSize || "xl"]} ${
-          heroColorClasses[homepageContent.heroTitleColor || "white"]
+        class={`${pickClass(heroTitleSizeClasses, homepageContent.heroTitleSize, "xl")} ${
+          pickClass(heroColorClasses, homepageContent.heroTitleColor, "white")
         } font-bold mb-6 animate-fade-in`}
       >
         {homepageContent.heroTitle}
@@ -94,8 +100,8 @@ const headingColorClasses = {
         </p>
       )}
       <p
-        class={`${heroSubtitleSizeClasses[homepageContent.heroSubtitleSize || "xl"]} ${
-          heroColorClasses[homepageContent.heroSubtitleColor || "accent"]
+        class={`${pickClass(heroSubtitleSizeClasses, homepageContent.heroSubtitleSize, "xl")} ${
+          pickClass(heroColorClasses, homepageContent.heroSubtitleColor, "accent")
         } font-light mb-8`}
       >
         {homepageContent.heroSubtitle}
@@ -125,8 +131,8 @@ const headingColorClasses = {
       <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center">
         <div class="order-2 md:order-1">
           <h2
-            class={`${headingSizeClasses[homepageContent.aboutHeadingSize || "xl"]} ${
-              headingColorClasses[homepageContent.aboutHeadingColor || "primary"]
+            class={`${pickClass(headingSizeClasses, homepageContent.aboutHeadingSize, "xl")} ${
+              pickClass(headingColorClasses, homepageContent.aboutHeadingColor, "primary")
             } font-bold mb-6`}
           >
             {homepageContent.aboutHeading}
@@ -152,8 +158,8 @@ const headingColorClasses = {
   <section id="books" class="py-20 bg-gradient-to-b from-gray-50 to-white">
     <div class="container mx-auto px-6">
       <h2
-        class={`${headingSizeClasses[homepageContent.booksHeadingSize || "xl"]} ${
-          headingColorClasses[homepageContent.booksHeadingColor || "primary"]
+        class={`${pickClass(headingSizeClasses, homepageContent.booksHeadingSize, "xl")} ${
+          pickClass(headingColorClasses, homepageContent.booksHeadingColor, "primary")
         } font-bold text-center mb-16`}
       >
         {homepageContent.booksHeading}
@@ -310,8 +316,8 @@ const headingColorClasses = {
     <div class="container mx-auto px-6">
       <div class="max-w-2xl mx-auto">
         <h2
-          class={`${headingSizeClasses[contactContent.headingSize || "xl"]} ${
-            heroColorClasses[contactContent.headingColor || "white"]
+          class={`${pickClass(headingSizeClasses, contactContent.headingSize, "xl")} ${
+            pickClass(heroColorClasses, contactContent.headingColor, "white")
           } font-bold text-center mb-8`}
         >
           {contactContent.heading}
